@@ -1,4 +1,4 @@
-/*结构输出测试*/
+/*Structure Output Test*/
 // #include "stdio.h"
 
 // struct date
@@ -35,7 +35,7 @@
 
 
 
-/*结构与函数*/
+/*Structure and Function*/
 #include <stdio.h>
 #include <stdbool.h>
 
@@ -51,7 +51,7 @@ int numberOfDays(struct date d);
 int main(){
     struct date today,tomorrow;
 
-    printf("请输入今天的日期（dd-mm-yyyy）:\n");
+    printf("Please enter today's date(dd-mm-yyyy):\n");
     scanf_s("%i-%i-%i",&today.day,&today.month,&today.year);
 
     if (today.day <= numberOfDays(today) && today.month <=12){
@@ -68,12 +68,12 @@ int main(){
             tomorrow.month=today.month+1;
             tomorrow.year=today.year;
         }
-        printf("明天的日期是%i-%i-%i。\n",
+        printf("Tomorrow is %i-%i-%i.\n",
             tomorrow.day, tomorrow.month,tomorrow.year);
-        printf("今天的日期是%i-%i-%i。\n",
+        printf("Today is %i-%i-%i.\n",
             today.day, today.month,today.year);
     }else{
-        printf("出错啦");
+        printf("error: invalid date.\n");
     }
     
     return 0;

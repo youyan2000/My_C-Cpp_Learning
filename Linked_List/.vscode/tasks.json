@@ -5,9 +5,6 @@
             "label": "Create Bin Directory",
             "type": "shell",
             "command": "if not exist \"${workspaceFolder}\\bin\" mkdir \"${workspaceFolder}\\bin\"",
-            "windows": {
-                "command": "if not exist \"${workspaceFolder}\\bin\" mkdir \"${workspaceFolder}\\bin\""
-            },
             "problemMatcher": []
         },
         {
@@ -18,7 +15,7 @@
                 "-fdiagnostics-color=always",
                 "-g",
                 "${fileDirname}\\main.c", 
-                "${fileDirname}\\resizable_array.c",
+                "${fileDirname}\\note.c",
                 "-I../inc",
                 "-o",
                 "../bin/main.exe" 

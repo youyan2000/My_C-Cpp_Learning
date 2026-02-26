@@ -1,89 +1,58 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "resizable_array.h"
 
-///*时间差计时器*/
-//int main(){
-//	int hour1,minute1,hour2,minute2;
-//	int t1,t2;
-//
-//	printf("输入第一个时间（示例：小时:分钟）\n");
-//	scanf_s("%d:%d",&hour1,&minute1);
-//	printf("输入第二个时间（示例：小时:分钟）\n");
-//	scanf_s("%d:%d",&hour2,&minute2);
-//
-//	t1=hour1*60+minute1;
-//	t2=hour2*60+minute2;
-//
-//	printf("时间差为%d分钟",t1-t2);
-//}
+const int BLOCK_SIZE = 10;
 
+Array array_create(int init_size){
+	Array arr;
+	arr.size = init_size;
+	arr.array = (int *)malloc(sizeof(int) * arr.size);
+	return arr;
+}
 
-/*时间差计时器*/
-// int main(){
-// 	int hour1,minute1,hour2,minute2;
-// 	int ih,im;
+void array_append(Array *arr, int more_size){
+    int *p = (int *)malloc(sizeof(int) * (arr->size + more_size));
+    memset(p, 0, (sizeof(int) * (arr->size + more_size))); 
+    memcpy(p, arr->array, sizeof(int) * arr->size);
+    free(arr->array);
+    arr->array = p;
+    arr->size += more_size;
+}
 
-// 	printf("输入第一个时间（示例：小时:分钟）\n");
-// 	scanf_s("%d:%d",&hour1,&minute1);
-// 	printf("输入第二个时间（示例：小时:分钟）\n");
-// 	scanf_s("%d:%d",&hour2,&minute2);
+void array_free(Array *arr){
+    free(arr->array);
+    arr->array = NULL;
+    arr->size = 0;
+}
 
-// 	ih=hour2-hour1;
-// 	im=minute2-minute1;
-// 	if(im<0){
-// 		im = 60 + im;
-// 		ih--;
-// 	}
+int array_size(const Array *arr){
+    return arr->size;
+}
 
-// 	printf("时间差为%d小时%d分钟",ih,im);
-// }
+int* array_at(Array *arr, int index){
+    if (index >= arr->size){
+        array_append(arr, (index+BLOCK_SIZE) - arr->size);
+    }
+    if (index < 0){
+        fprintf(stderr, "Index out of bounds: %d\n", index);
+        exit(EXIT_FAILURE);
+    }
+    return &(arr->array[index]);
+}
 
-
-
-/*平均数计时器*/
-//int main(){
-//	double a,b;
-//	double c;
-//
-//	printf("输入第一个数\n");
-//	scanf_s("%lf",&a);
-//	printf("输入第二个数\n");
-//	scanf_s("%lf",&b);
-//
-//	c=(a+b)/2.0;
-//	printf("%lf和%lf的平均值为%lf",a,b,c);
-//
-//}
-
-
-
-///*交换器*/
-//int main(){
-//	int a,b;
-//	int c;
-//
-//	printf("输入a\n");
-//	scanf_s("%d",&a);
-//	printf("输入b\n");
-//	scanf_s("%d",&b);
-//
-//	c=b;
-//	b=a;
-//	a=c;
-//	printf("a=%d\nb=%d",a,b);
-//
-//}
-
-
-
-/*十进制转二进制*/
-int main(){
-	int number;
-	scanf_s("%d",&number);
-	unsigned int mask = 1u<<31;
-	for ( ; mask ; mask>>=1){
-		printf("%d",number & mask?1:0);
-	}
-	printf("\n");
-
-	return 0;
+void array_print(const Array *arr) {
+    if (arr == NULL || arr->array == NULL) {
+        printf("Array is empty or invalid.\n");
+        return;
+    }
+    printf("[");
+    for (int i = 0; i < arr->size; i++) {
+        printf("%d", arr->array[i]);
+        if (i < arr->size - 1) {
+            printf(", ");
+        }
+    }
+    printf("]\n"); 
 }

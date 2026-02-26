@@ -1,89 +1,16 @@
-#include <stdio.h>
+#ifndef _ARRAY_H_
+#define _ARRAY_H_
 
-///*时间差计时器*/
-//int main(){
-//	int hour1,minute1,hour2,minute2;
-//	int t1,t2;
-//
-//	printf("输入第一个时间（示例：小时:分钟）\n");
-//	scanf_s("%d:%d",&hour1,&minute1);
-//	printf("输入第二个时间（示例：小时:分钟）\n");
-//	scanf_s("%d:%d",&hour2,&minute2);
-//
-//	t1=hour1*60+minute1;
-//	t2=hour2*60+minute2;
-//
-//	printf("时间差为%d分钟",t1-t2);
-//}
+typedef struct {
+	int *array;      // Pointer to the array data
+	int size;       // Current number of elements in the array
+} Array;
 
+Array array_create(int init_size); // Creates a new array
+void array_append(Array *arr, int more_size); // Appends a value to the end of the array
+void array_free(Array *arr); // Frees the memory allocated for the array
+int array_size(const Array *arr); // Returns the current size of the array
+int* array_at(Array *arr, int index); // Retrieves the value at a specific index
+void array_print(const Array *arr); // Prints the contents of the array
 
-/*时间差计时器*/
-// int main(){
-// 	int hour1,minute1,hour2,minute2;
-// 	int ih,im;
-
-// 	printf("输入第一个时间（示例：小时:分钟）\n");
-// 	scanf_s("%d:%d",&hour1,&minute1);
-// 	printf("输入第二个时间（示例：小时:分钟）\n");
-// 	scanf_s("%d:%d",&hour2,&minute2);
-
-// 	ih=hour2-hour1;
-// 	im=minute2-minute1;
-// 	if(im<0){
-// 		im = 60 + im;
-// 		ih--;
-// 	}
-
-// 	printf("时间差为%d小时%d分钟",ih,im);
-// }
-
-
-
-/*平均数计时器*/
-//int main(){
-//	double a,b;
-//	double c;
-//
-//	printf("输入第一个数\n");
-//	scanf_s("%lf",&a);
-//	printf("输入第二个数\n");
-//	scanf_s("%lf",&b);
-//
-//	c=(a+b)/2.0;
-//	printf("%lf和%lf的平均值为%lf",a,b,c);
-//
-//}
-
-
-
-///*交换器*/
-//int main(){
-//	int a,b;
-//	int c;
-//
-//	printf("输入a\n");
-//	scanf_s("%d",&a);
-//	printf("输入b\n");
-//	scanf_s("%d",&b);
-//
-//	c=b;
-//	b=a;
-//	a=c;
-//	printf("a=%d\nb=%d",a,b);
-//
-//}
-
-
-
-/*十进制转二进制*/
-int main(){
-	int number;
-	scanf_s("%d",&number);
-	unsigned int mask = 1u<<31;
-	for ( ; mask ; mask>>=1){
-		printf("%d",number & mask?1:0);
-	}
-	printf("\n");
-
-	return 0;
-}
+#endif

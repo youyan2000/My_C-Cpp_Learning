@@ -1,0 +1,29 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [     
+        {
+            "name": "调试C项目 (Win64)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "H:/C_program/raylib_test/bin/program.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "H:/C_program/raylib_test",
+            "environment": [],
+            "externalConsole": true,
+            "MIMode": "gdb",
+            "miDebuggerPath": "H:/GNU_C_Compiler/bin/gdb.exe",
+            "setupCommands": [
+                {
+                    "description": "启用gdb美观打印",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "编译C项目 (Win64)"  
+        }
+    ]
+}

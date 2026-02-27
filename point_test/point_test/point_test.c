@@ -1,36 +1,34 @@
-/*指针读取实验*/
-#include <stdio.h>
-void f(int *p);
-void g(int i);
+/*Pointer Reading Experiment*/
+// #include <stdio.h>
+// void f(int *p);
+// void g(int i);
 
-int main(){
-    int i=6;
-    int num[10]={2};
-    printf("&i=%p\n",&i);
-    printf("i=%d\n\n",i);
-    f(&i);
-    g(i);
-    f(num);
-    g(*num);
-    printf("sizeof(&num)=%d\n",sizeof(num));
-    printf("%+d\n",sizeof(long long));
-}
+// int main(){
+//     int i=6;
+//     int num[10]={2};
+//     printf("&i=%p\n",&i);
+//     printf("i=%d\n\n",i);
+//     f(&i);
+//     g(i);
+//     f(num);
+//     g(*num);
+//     printf("sizeof(&num)=%d\n",sizeof(num));
+// }
 
-void f(int *p){
-    printf("p=%p\n",p);
-    printf("*p=%d\n\n",*p);
-    // *p=26;
-}
+// void f(int *p){
+//     printf("p=%p\n",p);
+//     printf("*p=%d\n\n",*p);
+//     // *p=26;
+// }
 
-void g(int i){
-    printf("&i=%p\n",&i);
-    printf("i=%d\n\n",i);
-}
-
+// void g(int i){
+//     printf("&i=%p\n",&i);
+//     printf("i=%d\n\n",i);
+// }
 
 
 
-/*变量交换实验*/
+/*Variable Swapping Experiment*/
 // #include <stdio.h>
 // void swap(int *pa,int *pb);
 
@@ -54,7 +52,7 @@ void g(int i){
 
 
 
-/*返回两个变量值*/
+/*Return and Compare the Values of Two Variables*/
 // #include <stdio.h>
 // void minmax(int a[],int len,int *max,int *min);
 
@@ -82,49 +80,49 @@ void g(int i){
 
 
 
-/*高级除法*/
-// #include <stdio.h>
-// int divide(int a,int b,double *result);
+/*Advanced Division*/
+#include <stdio.h>
+int divide(int a,int b,double *result);
 
-// int main(){
-//     int a,b;
-//     double c;
-//     printf("请输入被除数");
-//     scanf_s("%d",&a);
-//     printf("请输入除数");
-//     scanf_s("%d",&b);
+int main(){
+    int a,b;
+    double c;
+    printf("Please enter the dividend:");
+    scanf("%d",&a);
+    printf("Please enter the divisor");
+    scanf("%d",&b);
 
-//     if (divide(a,b,&c)){
-//         printf("%d/%d=%lf",a,b,c);
-//     }else{
-//         printf("%d/%d=inf",a,b);
-//     }
-// }
+    if (divide(a,b,&c)){
+        printf("%d/%d=%lf\n",a,b,c);
+    }else{
+        printf("%d/%d=inf\n",a,b);
+    }
+}
 
-// int divide(int a,int b,double *result){
-//     int ret=1;
-//     if (b==0){
-//         ret=0;
-//     }else{
-//         *result=0.1*a/b;
-//     }
-//     return ret;
-// }
+int divide(int a,int b,double *result){
+    int ret=1;
+    if (b==0){
+        ret=0;
+    }else{
+        *result=0.1*a/b;
+    }
+    return ret;
+}
 
 
 
-/*动态内存分配*/
+/*Dynamic Memory Allocation*/
 // #include <stdio.h>
 // #include <stdlib.h>
 // int main(){
 //     int number;
 //     int* a;
 //     int i;
-//     printf("请输入数量：\n");
-//     scanf_s("%d",&number);
+//     printf("Please enter the quantity：\n");
+//     scanf("%d",&number);
 //     a=(int*)malloc(number*sizeof(int));
 //     for ( i=0 ; i<number ; i++){
-//         scanf_s("%d",&a[i]);
+//         scanf("%d",&a[i]);
 //     }
 //     for ( i=number-1 ; i<number ; i--){
 //         printf("%d\n",a[i]);
@@ -133,7 +131,8 @@ void g(int i){
 //     return 0;
 // }
 
-/*最大可分配内存测试*/
+
+/*Maximum Allocatable Memory Test*/
 // #include <stdio.h>
 // #include <stdlib.h>
 
@@ -143,7 +142,7 @@ void g(int i){
 //     while ((p=malloc(100*1024*1024))){
 //         cnt++;
 //     }
-//     printf("分配了%d00MB的空间\n",cnt);
+//     printf("Allocated %d00 MB of space.\n",cnt);
 //     free(p);
 //     return 0;
 // }

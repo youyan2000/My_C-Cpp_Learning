@@ -3,35 +3,33 @@
 	"tasks": [
 		{
 			"type": "cppbuild",
-            "label": "编译C项目 (Win64)",
-            "command": "H:/GNU_C_Compiler/bin/gcc.exe",
-            "args": [
-                "-g",
-                "H:/C_program/raylib_test/src/raylib_test.c",
-                "-I", 
-                "H:/C_program/raylib_test/include",
-				"-L", 
-                "H:/C_tools/raylib/lib",
+			"label": "编译 C 项目 (Win64 - Raylib)",
+			"command": "gcc",
+			"args": [
+				"-g",
+				"${file}", 
+				"-I", "${workspaceFolder}/inc",
+				"-L", "${workspaceFolder}/lib", 
 				"-lraylib",
 				"-lwinmm",
-                "-lgdi32",
-                "-lopengl32",
-				"-o", 
-                "H:/C_program/raylib_test/bin/program.exe",
-                "-m64",  
-                "-Wall",  
-                "-static-libgcc",  
-                "-fexec-charset=GBK" 
-            ],
-            "options": {
-                "cwd": "H:/C_program/raylib_test"
-            },
-            "problemMatcher": ["$gcc"],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "detail": "Win64 Console Application"
+				"-lgdi32",
+				"-lopengl32",
+				"-o",
+				"${fileDirname}/${fileBasenameNoExtension}.exe",
+				"-m64",
+				"-Wall",
+				"-static-libgcc",
+				"-fexec-charset=GBK"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": ["$gcc"],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"detail": "编译当前打开的 C 文件，输出到同级目录"
 		}
 	]
 }

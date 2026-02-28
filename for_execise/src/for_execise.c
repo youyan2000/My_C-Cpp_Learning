@@ -1,6 +1,6 @@
 ﻿#include <stdio.h>
 
-/*有 1、2、3、4 四个数字，能组成多少个互不相同且无重复数字的三位数？都是多少？*/
+/*There are four numbers: 1, 2, 3, and 4. How many different three-digit numbers can be formed without repeating any digit? And what are they?*/
 //int main(){
 //	int a=1,b=1,c=1,number=1;
 //
@@ -19,15 +19,15 @@
 //		c=1,b=1;
 //		a++;
 //	}
-//	printf("一共有%d个\n",number);
+//	printf("There are a total of %d.\n",number);
 //}
 
 
 
-/*程序每次读入一个正3位数，然后输出按位逆序的数字。注意：当输入的数字含有结尾的0时，输出不应带有前导的0。比如输入700，输出应该是7。*/
+/*The program reads in a positive 3-digit number each time, and then outputs the number in reverse order of its digits. Note: If the input number ends with a zero, the output should not have leading zeros. For example, if the input is 700, the output should be 7.*/
 // int main(){
 // 	int g=1,a,b,c;
-// 	printf("请输入一个正三位数\n");
+// 	printf("Please enter a positive three-digit number.\n");
 // 	scanf_s("%d",&g);
 
 // 	a=g/100;
@@ -38,12 +38,12 @@
 // }
 
 
-/*辗转相除法求最大公因数*/
+/*The Euclidean algorithm for finding the greatest common divisor*/
 // int main(){
 // 	int a,b,t;
-// 	printf("请输入第一个数a\n");
+// 	printf("Please enter a number a.\n");
 // 	scanf_s("%d",&a);
-// 	printf("请输入第一个数b\n");
+// 	printf("Please enter a number b.\n");
 // 	scanf_s("%d",&b);
 
 // 	while (b!=0){
@@ -52,19 +52,19 @@
 // 		b=t;
 // 	}
 
-// 	printf("a与b的最小公倍数为%d\n",a);
+// 	printf("The greatest common divisor of a and b is%d\n",a);
 	
 // 	return 0;
 // }
 
 
 
-/*给定不超过6的正整数A，考虑从A开始的连续4个数字。请输出所有由它们组成的无重复数字的3位数*/
+/*Given a positive integer A that is no more than 6, consider the four consecutive numbers starting from A. Please output all the 3-digit numbers composed of these numbers without repetition.*/
 // int main(){
 // 	int a,d;
 // 	int i,j,k;
 // 	int cut=0;
-// 	printf("请输入不超过6的正整数A\n");
+// 	printf("Please enter a positive integer A that is no more than 6.\n");
 // 	scanf_s("%d",&a);
 
 // 	for (i=a; i<=a+3 ; i++){
@@ -86,12 +86,12 @@
 
 
 
-/*水仙花数是指一个N位正整数（N>=3），它的每个位上的数字的N次幂之和等于它本身*/
+/*The Narcissistic Number refers to a positive integer with N digits (where N >= 3), whose sum of the Nth powers of each digit equals the number itself.*/
 // int main(){
 // 	int n,x;
 // 	int i=1,e=9;
 // 	int a,b,c,d;
-// 	printf("请输入N\n");
+// 	printf("Please enter N\n");
 // 	scanf_s("%d",&n);
 // 	b=n-1;
 // 	do{
@@ -123,7 +123,7 @@
 
 
 
-/*输出九九乘法表*/
+/*Output the multiplication table of 9 times 9*/
 // int main(){
 // 	int i,j,k;
 
@@ -143,7 +143,7 @@
 
 
 
-/*素数求和*/
+/*Sum of prime numbers*/
 // int main(){
 // 	int n,m;
 // 	int i,k,is;
@@ -165,17 +165,17 @@
 // 		}
 // 	}
 
-// 	printf("个数为%d,和为%d",cnt,sum);
+// 	printf("The number is %d, and the sum is %d.",cnt,sum);
 // 	return 0;
 // }
 
 
 
-/*约分最简分数*/
+/*Reduce to the simplest fraction*/
 // int main(){
 // 	int m,s;
 // 	int a,b,t=1;
-// 	printf("请输入需要约分的分数\n（格式为a/b）\n");
+// 	printf("Please enter the fraction that needs to be simplified\n(Format: a/b)\n");
 // 	scanf_s("%d/%d",&s,&m);
 // 	a=m;b=s;
 
@@ -191,7 +191,7 @@
 
 
 
-/*读数字*/
+/*Read the numbers*/
 // int main(){
 	// int in,z,x,num,mask=1;
 	// scanf_s("%d",&in);
@@ -226,4 +226,4 @@
 	// }while(mask>0);
 
 	// return 0;
-}
+// }

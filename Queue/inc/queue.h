@@ -1,16 +1,26 @@
-#ifndef _ARRAY_H_
-#define _ARRAY_H_
+#ifndef _QUEUE_H_
+#define _QUEUE_H_
 
-typedef struct {
-	int *array;      // Pointer to the array data
-	int size;       // Current number of elements in the array
-} Array;
+typedef struct _node
+{
+	int data;			 // The value stored in the array
+	struct _node *pNext; // Pointer to the next node in the queue
 
-Array array_create(int init_size); // Creates a new array
-void array_append(Array *arr, int more_size); // Appends a value to the end of the array
-void array_free(Array *arr); // Frees the memory allocated for the array
-int array_size(const Array *arr); // Returns the current size of the array
-int* array_at(Array *arr, int index); // Retrieves the value at a specific index
-void array_print(const Array *arr); // Prints the contents of the array
+} NODE;
+
+typedef struct _queue
+{
+	NODE *pHead; // Pointer to the front of the queue
+	NODE *pEnd;	 // Pointer to the rear of the queue
+	int size;	 // The current size of the queue
+} Queue;
+
+Queue *createQueue();				   // Function to create a new queue and initialize its members
+NODE *createNode(int data);			   // Function to create a new node with the given data
+void pushQueue(Queue *pQue, int data); // Function to add an element to the rear of the queue
+void popQueue(Queue *pQue);			   // Function to remove an element from the front of the queue
+int frontQueue(Queue *pQue);		   // Function to get the value of the front element in the queue
+int backQueue(Queue *pQue);			   // Function to get the value of the rear element in the queue
+void clearQueue(Queue *pQue);		   // Function to clear all elements from the queue and free memory
 
 #endif

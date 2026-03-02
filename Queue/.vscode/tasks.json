@@ -18,7 +18,7 @@
                 "-fdiagnostics-color=always",
                 "-g",
                 "${fileDirname}\\main.c", 
-                "${fileDirname}\\resizable_array.c",
+                "${fileDirname}\\queue.c",
                 "-I../inc",
                 "-o",
                 "../bin/main.exe" 

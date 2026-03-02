@@ -1,58 +1,88 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "resizable_array.h"
+#include "queue.h"
 
-const int BLOCK_SIZE = 10;
-
-Array array_create(int init_size){
-	Array arr;
-	arr.size = init_size;
-	arr.array = (int *)malloc(sizeof(int) * arr.size);
-	return arr;
-}
-
-void array_append(Array *arr, int more_size){
-    int *p = (int *)malloc(sizeof(int) * (arr->size + more_size));
-    memset(p, 0, (sizeof(int) * (arr->size + more_size))); 
-    memcpy(p, arr->array, sizeof(int) * arr->size);
-    free(arr->array);
-    arr->array = p;
-    arr->size += more_size;
-}
-
-void array_free(Array *arr){
-    free(arr->array);
-    arr->array = NULL;
-    arr->size = 0;
-}
-
-int array_size(const Array *arr){
-    return arr->size;
-}
-
-int* array_at(Array *arr, int index){
-    if (index >= arr->size){
-        array_append(arr, (index+BLOCK_SIZE) - arr->size);
+Queue* createQueue() {
+    Queue* pQue = (Queue*)malloc(sizeof(Queue));
+    if (pQue == NULL) {
+        printf("Memory allocation failed for queue.\n");
+        return NULL;
     }
-    if (index < 0){
-        fprintf(stderr, "Index out of bounds: %d\n", index);
-        exit(EXIT_FAILURE);
-    }
-    return &(arr->array[index]);
+    pQue->pHead = NULL;
+    pQue->pEnd = NULL;
+    pQue->size = 0;
+    return pQue;
 }
 
-void array_print(const Array *arr) {
-    if (arr == NULL || arr->array == NULL) {
-        printf("Array is empty or invalid.\n");
+NODE* createNode(int data) {
+    NODE* pNode = (NODE*)malloc(sizeof(NODE));
+    if (pNode == NULL) {
+        printf("Memory allocation failed for node.\n");
+        return NULL;
+    }
+    pNode->data = data;
+    pNode->pNext = NULL;
+    return pNode;
+}
+
+void pushQueue(Queue* pQue, int data) {
+    if (pQue == NULL) {
+        printf("Queue is not initialized.\n");
         return;
     }
-    printf("[");
-    for (int i = 0; i < arr->size; i++) {
-        printf("%d", arr->array[i]);
-        if (i < arr->size - 1) {
-            printf(", ");
-        }
+    NODE* pNode = createNode(data);
+    if (pNode == NULL) {
+        printf("Failed to create a new node.\n");
+        return; 
     }
-    printf("]\n"); 
+    if (pQue->size == 0) {
+        pQue->pHead = pNode;
+        pQue->pEnd = pNode;
+    } else {
+        pQue->pEnd->pNext = pNode;
+        pQue->pEnd = pNode;
+    }
+    pQue->size++;
+}
+
+void popQueue(Queue* pQue) {
+    if (pQue == NULL || pQue->size == 0) {
+        printf("Queue is empty or not initialized.\n");
+        return;
+    }
+    NODE* tempNode = pQue->pHead;
+    pQue->pHead = pQue->pHead->pNext;
+    free(tempNode);
+    pQue->size--;
+    if (pQue->size == 0) {
+        pQue->pEnd = NULL;
+    }
+}
+
+int frontQueue(Queue* pQue) {
+    if (pQue == NULL || pQue->size == 0) {
+        printf("Queue is empty or not initialized.\n");
+        return -1;
+    }
+    return pQue->pHead->data;
+}
+
+int backQueue(Queue* pQue) {
+    if (pQue == NULL || pQue->size == 0) {
+        printf("Queue is empty or not initialized.\n");
+        return -1;
+    }
+    return pQue->pEnd->data;
+}
+
+void clearQueue(Queue* pQue) {
+    if (pQue == NULL) {
+        printf("Queue is not initialized.\n");
+        return;
+    }
+    while (pQue->size > 0) {
+        popQueue(pQue);
+    }
+    free(pQue);
 }

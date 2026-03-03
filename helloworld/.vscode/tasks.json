@@ -1,0 +1,31 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "cppbuild",
+            "label": "C/C++: g++.exe build active file to bin",
+            "command": "H:\\GNU_C_Compiler\\bin\\g++.exe",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-g",
+                "-std=c++17",
+                "${workspaceFolder}\\src\\main.cpp",
+                "-I${workspaceFolder}\\inc", 
+                "-o",
+                "${workspaceFolder}\\bin\\${fileBasenameNoExtension}.exe" 
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "编译器: H:\\GNU_C_Compiler\\bin\\g++.exe",
+            "dependsOn": "Create Bin Directory" 
+        }
+    ]
+}

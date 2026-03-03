@@ -1,0 +1,40 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Create Bin Directory",
+            "type": "shell",
+            "command": "if not exist \"${workspaceFolder}\\bin\" mkdir \"${workspaceFolder}\\bin\"",
+            "windows": {
+                "command": "if not exist \"${workspaceFolder}\\bin\" mkdir \"${workspaceFolder}\\bin\""
+            },
+            "problemMatcher": []
+        },
+        {
+            "type": "cppbuild",
+            "label": "C/C++: gcc.exe build to bin",
+            "command": "H:\\GNU_C_Compiler\\bin\\gcc.exe",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-g",
+                "${fileDirname}\\main.c", 
+                "${fileDirname}\\stack.c",
+                "-I../inc",
+                "-o",
+                "../bin/main.exe" 
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "compiler: H:\\GNU_C_Compiler\\bin\\gcc.exe",
+            "dependsOn": "Create Bin Directory"
+        }
+    ]
+}

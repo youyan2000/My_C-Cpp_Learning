@@ -1,0 +1,19 @@
+﻿生成启动时间为 2026/2/10 16:49:17。
+     1>项目“H:\C_program\FOR_EXECISE\FOR_EXECISE\FOR_EXECISE.vcxproj”在节点 2 上(build 个目标)。
+     1>InitializeBuildStatus:
+         正在对“Debug\FOR_EXECISE.unsuccessfulbuild”执行 Touch 任务。
+       ClCompile:
+         D:\VC2010\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TC /analyze- /errorReport:prompt FOR_EXECISE.c
+         FOR_EXECISE.c
+       ManifestResourceCompile:
+         所有输出均为最新。
+       Link:
+         D:\VC2010\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"H:\C_program\FOR_EXECISE\Debug\FOR_EXECISE.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\FOR_EXECISE.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"H:\C_program\FOR_EXECISE\Debug\FOR_EXECISE.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"H:\C_program\FOR_EXECISE\Debug\FOR_EXECISE.lib" /MACHINE:X86 Debug\FOR_EXECISE.exe.embed.manifest.res
+         Debug\FOR_EXECISE.obj
+     1>MSVCRTD.lib(crtexew.obj) : error LNK2019: 无法解析的外部符号 _WinMain@16，该符号在函数 ___tmainCRTStartup 中被引用
+     1>H:\C_program\FOR_EXECISE\Debug\FOR_EXECISE.exe : fatal error LNK1120: 1 个无法解析的外部命令
+     1>已完成生成项目“H:\C_program\FOR_EXECISE\FOR_EXECISE\FOR_EXECISE.vcxproj”(build 个目标)的操作 - 失败。
+
+生成失败。
+
+已用时间 00:00:00.22

@@ -1,0 +1,42 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "编译 C 项目 (Win64 - Raylib音频版)",
+            "type": "cppbuild",
+            "command": "H:/GNU_C_Compiler/bin/gcc.exe",
+            "args": [
+                "-g",
+                "${file}",
+                "-I", "${workspaceFolder}/inc",
+                "-L", "${workspaceFolder}/lib",
+                "-DGRAPHICS_API_OPENGL_33",
+                "-m64",
+                "-Wall",
+                "-static-libgcc",
+                "-fexec-charset=GBK",
+                "-std=c11",
+                "-o", "${workspaceFolder}/bin/program.exe",// Raylib 核心库 + 音频相关依赖
+                "-lraylib",
+                "-lwinmm",      // 音频/多媒体支持
+                "-lgdi32",      // 图形设备接口
+                "-lopengl32",   // OpenGL
+                "-lmsvcrt",     // C运行时库
+                "-ladvapi32",   // 高级API支持
+                "-lcomdlg32",   // 通用对话框
+                "-lole32",      // OLE支持
+                "-lws2_32"      // Windows套接字（Raylib音频可能用到）
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": ["$gcc"],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Win64 Raylib项目编译（含音频支持），适配音乐播放功能"
+        }
+    ]
+}
+

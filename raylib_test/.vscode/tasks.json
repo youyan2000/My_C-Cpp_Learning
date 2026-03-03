@@ -1,0 +1,35 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "cppbuild",
+			"label": "编译 C 项目 (Win64 - Raylib)",
+			"command": "gcc",
+			"args": [
+				"-g",
+				"${file}", 
+				"-I", "${workspaceFolder}/inc",
+				"-L", "${workspaceFolder}/lib", 
+				"-lraylib",
+				"-lwinmm",
+				"-lgdi32",
+				"-lopengl32",
+				"-o",
+				"${fileDirname}/${fileBasenameNoExtension}.exe",
+				"-m64",
+				"-Wall",
+				"-static-libgcc",
+				"-fexec-charset=GBK"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": ["$gcc"],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"detail": "编译当前打开的 C 文件，输出到同级目录"
+		}
+	]
+}

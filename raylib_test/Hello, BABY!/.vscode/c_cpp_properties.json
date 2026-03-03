@@ -1,0 +1,28 @@
+{
+    "configurations": [
+        {
+            "name": "Win64",
+            "includePath": [
+                "${workspaceFolder}/inc",
+                "${workspaceFolder}/src",
+                "H:/GNU_C_Compiler/lib/gcc/x86_64-w64-mingw32/15.2.0/include"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE",
+                "_WIN64"
+            ],
+            "compilerPath": "H:/GNU_C_Compiler/bin/gcc.exe",
+            "cStandard": "c17",
+            "intelliSenseMode": "windows-gcc-x64",
+            "browse": {
+                "path": [
+                    "${workspaceFolder}/**"
+                ],
+                "limitSymbolsToIncludedHeaders": true
+            }
+        }
+    ],
+    "version": 4
+}

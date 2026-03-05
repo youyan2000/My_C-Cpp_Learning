@@ -6,7 +6,7 @@
 #include <string.h>
 #include <stdbool.h>
 
-// 常量定义
+// define constants
 #define MAX_NAME 50
 #define MAX_MAJOR 50
 #define MAX_GENDER 10
@@ -15,7 +15,7 @@
 #define MAX_STUDENT_ID 20
 #define MAX_MEMBERS 100
 
-// 基类：成员（封装教师和学生的共同属性）
+// base class: Member
 class Member {
 protected:
     char name[MAX_NAME];
@@ -52,7 +52,7 @@ public:
     virtual const char* getStudentID() const;
 };
 
-// 派生类：教师
+// teacher(derived class A)
 class Teacher : public Member {
 public:
     // 构造函数
@@ -92,20 +92,16 @@ private:
     Member* members[MAX_MEMBERS];  // 多态数组：存储教师/学生对象
     int memberCount;               // 当前成员数量
     const char* csvFilePath;       // CSV文件路径
-
-    // 排序辅助函数：按组别、职位排序
-    void sortMembers();
+    void sortMembers();    // 排序辅助函数：按组别、职位排序
 
 public:
-    // 构造函数
+    // constructor
     Lab(const char* path);
-    // 析构函数
+    // destructor
     ~Lab();
-
     // 加载/保存CSV文件
     bool loadFromCSV();
     bool saveToCSV();
-
     // 成员管理功能
     bool addMember(Member* newMember);
     Member* findMember(const char* name);
@@ -114,7 +110,7 @@ public:
     void countMembers();
 };
 
-// 菜单函数声明
+// menu function declaration
 void showMenu();
 
-#endif // LAB_MEMBER_HPP
+#endif

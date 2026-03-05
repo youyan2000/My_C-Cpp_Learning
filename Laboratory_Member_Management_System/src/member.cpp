@@ -1,6 +1,6 @@
 #include "member.hpp"
 
-// ==================== Member类实现 ====================
+// ==================== Class Member ====================
 Member::Member() {
     memset(name, 0, sizeof(name));
     memset(gender, 0, sizeof(gender));
@@ -30,7 +30,7 @@ void Member::setPosition(const char* p) { strncpy(position, p, MAX_POSITION-1); 
 const char* Member::getGroup() const { return ""; }
 const char* Member::getStudentID() const { return ""; }
 
-// ==================== Teacher类实现 ====================
+// ==================== Class Teacher ====================
 Teacher::Teacher() : Member() {}
 Teacher::Teacher(const char* n, const char* g, const char* m, const char* p) 
     : Member(n, g, m, p) {}
@@ -41,15 +41,15 @@ void Teacher::toCSV(char* buffer, int bufferSize) {
 }
 
 void Teacher::displayInfo() {
-    printf("【教师】\n");
-    printf("姓名：%s\n", getName());
-    printf("性别：%s\n", getGender());
-    printf("专业：%s\n", getMajor());
-    printf("职位：%s\n", getPosition());
+    printf("【teacher】\n");
+    printf("name: %s\n", getName());
+    printf("gender: %s\n", getGender());
+    printf("major: %s\n", getMajor());
+    printf("position: %s\n", getPosition());
     printf("------------------------\n");
 }
 
-// ==================== Student类实现 ====================
+// ==================== Class Student ====================
 Student::Student() : Member() {
     memset(group, 0, sizeof(group));
     memset(studentID, 0, sizeof(studentID));
@@ -73,23 +73,23 @@ void Student::toCSV(char* buffer, int bufferSize) {
 }
 
 void Student::displayInfo() {
-    printf("【学生】\n");
-    printf("姓名：%s\n", getName());
-    printf("性别：%s\n", getGender());
-    printf("专业：%s\n", getMajor());
-    printf("职位：%s\n", getPosition());
-    printf("组别：%s\n", getGroup());
-    printf("学号：%s\n", getStudentID());
+    printf("【student】\n");
+    printf("name: %s\n", getName());
+    printf("gender: %s\n", getGender());
+    printf("major: %s\n", getMajor());
+    printf("position: %s\n", getPosition());
+    printf("group: %s\n", getGroup());
+    printf("studentID: %s\n", getStudentID());
     printf("------------------------\n");
 }
 
-// ==================== Lab类实现 ====================
+// ==================== Class Lab ====================
 Lab::Lab(const char* path) : memberCount(0), csvFilePath(path) {
-    // 初始化数组
+    // inite members array
     for (int i = 0; i < MAX_MEMBERS; i++) {
         members[i] = nullptr;
     }
-    // 加载CSV文件数据
+    // load CSV data
     loadFromCSV();
 }
 
@@ -108,7 +108,7 @@ void Lab::sortMembers() {
             // 先按组别排序（教师组别为空，排前面）
             int groupCmp = strcmp(members[j]->getGroup(), members[j+1]->getGroup());
             if (groupCmp > 0) {
-                // 交换
+                // exchange members[j] and members[j+1]
                 Member* temp = members[j];
                 members[j] = members[j+1];
                 members[j+1] = temp;
@@ -132,7 +132,7 @@ bool Lab::loadFromCSV() {
         return false;
     }
 
-    // 清空现有数据
+    // clear existing members
     for (int i = 0; i < memberCount; i++) {
         delete members[i];
         members[i] = nullptr;
@@ -185,12 +185,12 @@ bool Lab::loadFromCSV() {
 bool Lab::saveToCSV() {
     FILE* fp = fopen(csvFilePath, "w");
     if (!fp) {
-        printf("错误：无法写入文件！\n");
+        printf("error: CANNOT write to file! \n");
         return false;
     }
 
     // 写入表头
-    fprintf(fp, "姓名,性别,专业,职位,类型,组别,学号\n");
+    fprintf(fp, "name,gender,major,position,type,group,studentID\n");
 
     // 先排序再保存
     sortMembers();
@@ -209,7 +209,7 @@ bool Lab::saveToCSV() {
 
 bool Lab::addMember(Member* newMember) {
     if (!newMember) {
-        printf("错误：无效的成员对象！\n");
+        printf("error: invalid member object! \n");
         return false;
     }
 

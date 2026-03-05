@@ -6,12 +6,14 @@ int main(void) {
     int num, pos, ret;
 
     // crate list
-    ret = CreateList();
+    List list = InitList();
+    ret = CreateList(list);
+    
     if (ret != 0) {
         if (ret == -2) {
             // 无有效数据时，允许重新输入
             printf("请重新创建链表：\n");
-            CreateList();
+            CreateList(list);
         } else {
             return -1;
         }

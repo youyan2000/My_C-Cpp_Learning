@@ -1,0 +1,38 @@
+# 编译产物
+*.exe
+*.dll
+*.so
+*.o
+*.obj
+*.lib
+*.a
+*.pdb
+*.ilk
+*.exp
+*.map
+
+# Visual Studio / VSCode
+.vscode/
+.ipch/
+*.sdf
+*.suo
+*.user
+*.aps
+*.ncb
+*.opendb
+*.opensdf
+*.VC.db
+*.VC.VC.opendb
+
+# 构建目录
+Debug/
+Release/
+x64/
+x86/
+bin/
+obj/
+build/
+
+# 临时文件
+*.tmp
+*.bak

@@ -9,14 +9,14 @@ int main(){
     };
     char *ColorName =NULL;
 
-    printf("请输入你喜欢的颜色代码：");
+    printf("Please enter the color code you like: ");
     scanf_s("%d",&color);
     if (color>=0 && color<NumCOLORS){
         ColorName=ColorNames[color];
     }else{
         ColorName="unknown";
     }
-    printf("你喜欢的颜色是%s\n",ColorName);
+    printf("The color you like is %s\n",ColorName);
     return 0;
 
 }

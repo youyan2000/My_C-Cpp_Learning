@@ -1,6 +1,6 @@
 ﻿#include <stdio.h>
 
-/*正序计算阶乘*/
+/*Calculate factorial in ascending order*/
 // int main(){
 // 	int n;
 // 	int fact=1;
@@ -17,7 +17,7 @@
 
 
 
-/*逆序计算阶乘*/
+/*Calculate factorial in reverse order*/
 // int main(){
 // 	int n;
 // 	int fact=1;
@@ -35,7 +35,7 @@
 
 
 
-/*计算素数*/
+/*Calculate prime numbers*/
 // int main(){
 // 	int x;
 // 	int i=2;
@@ -52,16 +52,16 @@
 // 	printf("fuck");
 // 	}
 // 	if (isprime==0){
-// 		printf("%d不是素数",x);
+// 		printf("%d is not a prime number",x);
 // 	}else{
-// 		printf("%d是素数",x);
+// 		printf("%d is a prime number",x);
 // 	}
 // }
 
 
 
 
-/*罗列素数*/
+/*List the prime numbers*/
 // int main(){
 // 	int x=2;
 // 	int i;
@@ -83,12 +83,12 @@
 // 		}
 		
 // 	}
-// 	printf("一共有%d个素数\n",cut);
+// 	printf("There are %d prime numbers\n",cut);
 // }
 
 
 
-/*人民币计算器*/
+/* RMB Calculator*/
 // int main(){
 // 	int x,cunt=0;
 // 	int one=1, five=1,ten=1,twenty=1,fifty=1,hundred=1;
@@ -102,7 +102,8 @@
 //                     for(fifty=0;fifty<=x;fifty++){
 //                         for(hundred=0;hundred<=x;hundred++){
 //                             if (one+10*ten+5*five+20*twenty+50*fifty+100*hundred==x){
-//                                 printf("%d个一元，加%d个五元，加%d个十元，加%d个二十元，加%d个五十元，加%d个一百元为%d元\n",one, five,ten,twenty,fifty,hundred,x);
+//                                 printf("%d one-yuan coins, plus %d five-yuan coins, plus %d ten-yuan coins, plus %d twenty-yuan coins, plus %d fifty-yuan coins, plus %d hundred-yuan coins equal %d yuan.\n"
+//                                        ,one, five,ten,twenty,fifty,hundred,x);
 //                                 cunt++;
 //                             }
 //                         }
@@ -116,7 +117,7 @@
 
 
 
-/*分数求和*/
+/*Summation of Fractions*/
 // int main(){
 // 	int n,i,j;
 // 	double sum=0.0,sum1=0.0;
@@ -139,7 +140,7 @@
 
 
 
-/*取整数*/
+/*round-off number*/
 // int main(){
 // 	int x;
 // 	int mask=1;
@@ -169,7 +170,7 @@
 
 
 
-/*计算序列2/1+3/2+5/3+8/5+...的前N项之和；从第2项起，每一项的分子是前一项分子与分母的和，分母是前一项的分子*/
+/*Calculate the sum of the first N terms of the sequence 2/1+3/2+5/3+8/5+...; starting from the second term, each term's numerator is the sum of the previous term's numerator and denominator, and the denominator is the previous term's numerator*/
 int main(){
     double m=1,s=2,t;
     int n,i;

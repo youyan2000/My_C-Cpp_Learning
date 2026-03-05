@@ -1,7 +1,7 @@
 ﻿#include <stdio.h>
 
 
-/*求和函数*/
+/*sum function*/
 int sum(int begin,int end){
     int i,sum=0;
     for (i=begin ; i<end ; i++){

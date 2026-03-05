@@ -1,12 +1,12 @@
 ﻿#include <stdio.h>
 
-/*数组求和*/
+/*Array summation*/
 // int main(){
 //     int x,n;
 //     double sum=0;
 //     int cnt=0;
     
-//     printf("请输入需要求和的数组的个数n\n");
+//     printf("Please enter the number of arrays that need to be summed n\n");
 //     scanf_s("%d",&n);
 //     int number[n];
 
@@ -32,7 +32,7 @@
 
 
 
-/*统计个数*/
+/*Count the number*/
 // int main(){
 //     #define NUMBER 10  
 //     int i,x,n,cnt=0;
@@ -41,7 +41,7 @@
 //     // for ( i=0; i<NUMBER; i++){
 //     //     count[i]=0;
 //     // }
-//     printf("请输入数字总数\n");
+//     printf("Please enter the total number of digits\n");
 //     scanf_s("%d",&n);
 
 //     do{
@@ -50,13 +50,13 @@
 //             count[x]++;
 //             cnt++;
 //         }else{
-//             printf("出错请重新输入\n");
+//             printf("Error please re-enter\n");
 //         }
         
 //     }while (cnt<n);
 
 //     for ( i=0; i<NUMBER; i++){
-//         printf("%d出现了%d次\n",i,count[i]);
+//         printf("Number %d appeared %d times\n",i,count[i]);
 //     }
     
 //     return 0;
@@ -64,7 +64,7 @@
 
 
 
-/*找前1000位素数*/
+/*Find the first 1000 prime numbers*/
 // int isprime(int x,int knwon[],int numberknown){
 //     int ret=1;
 //     int i;
@@ -143,19 +143,19 @@ int main(){
     int board[size][size];
     int i,j;
     int num0fx,num0fo;
-    int result=-1;/*-1为没人赢，1为x赢，0为o赢*/
+    int result=-1;//-1 indicates no winner, 1 indicates x wins, and 0 indicates o wins.
 
-    /*读取数组*/
+    /*Read the array*/
     for ( i=0; i<size ; i++){
         for ( j=0; j<size ; j++){
             scanf_s("%d",&board[i][j]);
         }
     }
 
-    /*检查行列*/
+    /*Check rows and columns*/
     result=win1(i,j,board,num0fx,num0fo,result);
     result=win1(j,i,board,num0fx,num0fo,result);
-    /*检查对角线*/
+    /*Check diagonals*/
     result=win2(i,i,board,num0fx,num0fo,result);
     result=win2(i,size-i-1,board,num0fx,num0fo,result);
 

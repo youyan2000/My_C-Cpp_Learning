@@ -1,30 +1,30 @@
 #include <stdio.h>
 
-///*时间差计时器*/
+///*Time difference timer*/
 //int main(){
 //	int hour1,minute1,hour2,minute2;
 //	int t1,t2;
 //
-//	printf("输入第一个时间（示例：小时:分钟）\n");
+//	printf("Enter the first time (example: hours:minutes)\n");
 //	scanf_s("%d:%d",&hour1,&minute1);
-//	printf("输入第二个时间（示例：小时:分钟）\n");
+//	printf("Enter the second time (example: hours:minutes)\n");
 //	scanf_s("%d:%d",&hour2,&minute2);
 //
 //	t1=hour1*60+minute1;
 //	t2=hour2*60+minute2;
 //
-//	printf("时间差为%d分钟",t1-t2);
+//	printf("The time difference is %d minutes",t1-t2);
 //}
 
 
-/*时间差计时器*/
+/*Time difference timer*/
 // int main(){
 // 	int hour1,minute1,hour2,minute2;
 // 	int ih,im;
 
-// 	printf("输入第一个时间（示例：小时:分钟）\n");
+// 	printf("Enter the first time (example: hours:minutes)\n");
 // 	scanf_s("%d:%d",&hour1,&minute1);
-// 	printf("输入第二个时间（示例：小时:分钟）\n");
+// 	printf("Enter the second time (example: hours:minutes)\n");
 // 	scanf_s("%d:%d",&hour2,&minute2);
 
 // 	ih=hour2-hour1;
@@ -34,36 +34,36 @@
 // 		ih--;
 // 	}
 
-// 	printf("时间差为%d小时%d分钟",ih,im);
+// 	printf("The time difference is %d hours and %d minutes",ih,im);
 // }
 
 
 
-/*平均数计时器*/
+/*Average timer*/
 //int main(){
 //	double a,b;
 //	double c;
 //
-//	printf("输入第一个数\n");
+//	printf("Please enter the first number a\n");
 //	scanf_s("%lf",&a);
-//	printf("输入第二个数\n");
+//	printf("Please enter the second number b\n");
 //	scanf_s("%lf",&b);
 //
 //	c=(a+b)/2.0;
-//	printf("%lf和%lf的平均值为%lf",a,b,c);
+//	printf("The average of %lf and %lf is %lf",a,b,c);
 //
 //}
 
 
 
-///*交换器*/
+///*exchanger*/
 //int main(){
 //	int a,b;
 //	int c;
 //
-//	printf("输入a\n");
+//	printf("Please enter a\n");
 //	scanf_s("%d",&a);
-//	printf("输入b\n");
+//	printf("Please enter b\n");
 //	scanf_s("%d",&b);
 //
 //	c=b;
@@ -75,7 +75,7 @@
 
 
 
-/*十进制转二进制*/
+/*Decimal to binary conversion*/
 int main(){
 	int number;
 	scanf_s("%d",&number);

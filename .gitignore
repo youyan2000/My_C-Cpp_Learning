@@ -1,0 +1,13 @@
+*.exe
+*.obj
+*.pdb
+*.ilk
+*.sdf
+*.suo
+*.user
+Debug/
+Release/
+bin/
+.vscode/
+ipch/
+*.tlog

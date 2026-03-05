@@ -1,4 +1,4 @@
-﻿/*数组测试*/
+﻿/*Array test*/
 // #include <stdio.h>
 // int main(){
 //     int i=0;
@@ -22,10 +22,10 @@
 
 
 
-/*月份读数*/
+/*Reading Month*/
 // #include <stdio.h>
 // int main(){
-//     printf("请输入月份：");
+//     printf("Please enter the month：");
 //     int monthnum;
 //     char *monthname[] = {
 //     "January", "February", "March", "April",
@@ -38,7 +38,7 @@
 
 
 
-/*单字符读写测试*/
+/*Single character read/write test*/
 // #include <stdio.h>
 // int main(){
 //     int ch;
@@ -53,7 +53,7 @@
 
 
 
-/*string函数以及我的string函数*/
+/*The string function and My string function*/
 // #include <stdio.h>
 // #include <string.h>
 

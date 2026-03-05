@@ -1,5 +1,6 @@
 #include <iostream>
 #include "limitvalue.hpp"
+#include "motor.hpp"
 
 int main() {
     //test int type LimitValue
@@ -19,6 +20,20 @@ int main() {
     std::cout << "PWM duty after -=150: " << pwm_duty.val() << std::endl;
     pwm_duty = 123.4;  // 123.4 → be limited as 100.0
     std::cout << "PWM duty after =123.4: " << pwm_duty.val() << std::endl;
+
+    //test DJI Hardware Motor（CAN ID 0x201）
+    IMotor* dji_motor = new DJIMotor(0x201);
+    TestMotor(dji_motor, 500);  // First Control: Small Output
+    TestMotor(dji_motor, 1000); // Second Control: Large Output
+    TestMotor(dji_motor, 0);    // Third Control: Stop Output
+    delete dji_motor; 
+    
+    //test Physical Simulation Motor
+    IMotor* sim_motor = new SimMotor();
+    TestMotor(sim_motor, 500);  // First Control: Small Output
+    TestMotor(sim_motor, 1000); // Second Control: Large Output
+    TestMotor(sim_motor, 0);    // Third Control: Stop Output
+    delete sim_motor;
 
     return 0;
 }

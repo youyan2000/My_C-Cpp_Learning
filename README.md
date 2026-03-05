@@ -1,1 +1,1 @@
-This is an assignment assigned during winter vacation and completed while studying C++.
+These are some assignments assigned during winter vacation and completed while studying C/C++.

@@ -1,129 +1,190 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "list.h"
 
-
-// 函数功能：在指定位置插入元素（位置从1开始）
-// 入口参数：num：要插入的元素值（不能为-1）；position：插入位置
-// 返回值：0成功，-1位置无效，-2输入数据非法，-3内存分配失败，-4链表未初始化
-int AddtoList(int num, int position) {
-    // 合法性检查
-    if (num == -1) {
-        printf("插入失败：不能插入-1！\n");
-        return -2;
-    }
-    if (position < 1) {
-        printf("插入失败：位置必须大于等于1！\n");
-        return -1;
-    }
-    if (head == NULL) {
-        printf("插入失败：链表未初始化！\n");
-        return -4;
-    }
-
-    // 找到插入位置的前驱节点
-    DLinkList p = head;
+Node toFind(List *plist, int position){
+    Node *p = plist->head;
     int curPos = 0;
-    while (p != NULL && curPos < position - 1) {
+    while (p->next != NULL && curPos < position - 1) {
         p = p->next;
         curPos++;
     }
+    return *p;
+}
 
-    // 位置超出链表长度（比如链表只有2个节点，插入位置4）
-    if (p == NULL) {
-        printf("插入失败：指定位置%d超出链表范围！\n", position);
+List InitList() {
+    List list;
+    list.head = (Node*)malloc(sizeof(Node));
+    if (list.head == NULL) {
+        printf("Fail to allocate memory!\n");
+        }
+    list.head->prev = NULL;
+    list.head->next = NULL;
+    return list;
+}
+
+int CreateList(List *plist) {
+    if (plist->head!=NULL){
+        printf("List already exists!\n");
         return -1;
     }
-
-    // 创建新节点
-    DLinkList newNode = (DLinkList)malloc(sizeof(DNode));
-    if (newNode == NULL) {
-        printf("插入失败：内存分配失败！\n");
-        return -3;
+    int data, count = 0;
+    Node* p = plist->head;
+    printf("Please enter data (enter -1 to end, up to 10 valid entries, -1 will not be stored): \n");
+    while (1) {
+        if (scanf("%d", &data) != 1) {
+            while (getchar() != '\n');
+            printf("Format error! Please enter an integer:\n");
+            continue;
+        }
+        if (data == -1) {
+            break;
+        }
+        if (count >= 10) {
+            printf("You have already entered 10 effective data, automatically end input!\n");
+            break;
+        }
+        Node* newNode = (Node*)malloc(sizeof(Node));
+        if (newNode == NULL) {
+            printf("Memory allocation failed, failed to create linked list!\n");
+            return -1;
+        }
+        newNode->value = data; // set value of new node
+        newNode->next = NULL;  // new node is the new tail, so next is NULL
+        newNode->prev = p;     // link new node to the previous node
+        p->next = newNode;     // link previous node to the new node
+        p = newNode;           // push p to the new tail
+        count++;               // add count of effective data
+        plist->tail = p;       // reassign tail to the new last node
+    }
+    if (count == 0) {
+        printf("No valid data, failed to create linked list!\n");
+        return -2;
     }
 
-    newNode->data = num;
-    // 调整指针（核心：双向链表插入）
-    newNode->prev = p;                // 新节点前驱指向p
-    newNode->next = p->next;          // 新节点后继指向p的原后继
-    if (p->next != NULL) {            // 如果p不是尾节点
-        p->next->prev = newNode;      // p原后继的前驱指向新节点
-    }
-    p->next = newNode;                // p的后继指向新节点
-
-    printf("元素%d已成功插入到位置%d！\n", num, position);
+    printf("linkedlist created successfully,totally input %d effective nodes.\n", count);
     return 0;
 }
 
-// 函数功能：删除链表中所有的负数
-// 入口参数：无
-// 返回值：0成功，-1链表为空，-2链表未初始化
-int DelListData() {
-    if (head == NULL) {
-        printf("删除失败：链表未初始化！\n");
-        return -2;
-    }
-    if (head->next == NULL) {
-        printf("删除失败：链表为空！\n");
+int Addtolist(List *plist, const int number, const int position){    
+    if (number == -1) {
+        printf("fail to add: cannot add -1!\n");
         return -1;
     }
+    if (position < 1) {
+        printf("fail to add: position must be a positive integer!\n");
+        return -2;
+    }
+    if (plist->head == NULL) {
+        printf("fail to add: list not initialized!\n");
+        return -3;
+    }
+    
+    Node *p;
+    *p = toFind(plist, position);
+    Node *newnode = (Node*)malloc(sizeof(Node));
+    if (newnode == NULL) {
+        printf("fail to add: memory allocation failed!\n");
+        return -4;
+    }
+    newnode->value = number;
+    newnode->prev = p;
+    newnode->next = p->next;
 
-    DLinkList p = head->next;  // 遍历指针
-    int delCount = 0;          // 记录删除的节点数
+    if (p->next != plist->tail->next) {
+        p->next->prev = newnode;
+    }
+    p->next = newnode;
 
-    while (p != NULL) {
-        DLinkList temp = p;    // 保存当前节点（防止删除后丢失指针）
-        p = p->next;           // 先移动指针，避免删除后无法遍历
+    printf("element %d has successfully added to position %d.\n", number, position);
+    return 0;
+}
+
+int DelListData(List *plist) {
+    if (plist->head == NULL) {
+        printf("fail to delete: list not initialized!\n");
+        return -2;
+    }
+    if (plist->head->next == NULL) {
+        printf("fail to delete: list is empty!\n");
+        return -1;
+    }
+    Node *p = plist->head->next;
+    int delCount = 0;
+    while (p != plist->tail->next) {
+        Node *temp = p;
+        p = p->next;
         
-        if (temp->data < 0) {  // 是负数则删除
-            // 调整指针
-            temp->prev->next = temp->next;  // 前驱节点的后继指向当前节点的后继
-            if (temp->next != NULL) {       // 如果不是尾节点
-                temp->next->prev = temp->prev;  // 后继节点的前驱指向当前节点的前驱
+        if (temp->value < 0) { 
+            temp->prev->next = temp->next; 
+            if (temp->next != plist->tail->next) {
+                temp->next->prev = temp->prev; 
             }
-            free(temp);        // 释放内存
+            free(temp);
             delCount++;
         }
     }
-
-    printf("删除完成，共删除%d个负数节点！\n", delCount);
+    printf("Delete successful, totally deleted %d negative nodes.\n", delCount);
     return 0;
 }
 
-// 函数功能：原地逆转双向链表（不创建新节点，仅调整指针）
-// 入口参数：无
-// 返回值：0成功，-1链表为空，-2链表未初始化
-int InvertList() {
-    if (head == NULL) {
-        printf("逆转失败：链表未初始化！\n");
+int OutputList(List *plist){
+    if (plist->head == NULL || plist->head->next == NULL) {
+        printf("fail to output: list is empty!\n");
+        return -1;
+    }
+    printf("Current list data: [ ");
+    Node *p;
+    for (p = plist->head ; p != NULL ; p = p->next){
+        printf("%d ", p->value);
+    }
+    printf("]\n");
+    return 0;
+}
+
+
+int InvertList(List *plist) {
+    if (plist->head == NULL) {
+        printf("fail to invert: list not initialized!\n");
         return -2;
     }
-    if (head->next == NULL) {
-        printf("逆转失败：链表为空！\n");
+    if (plist->head->next == NULL) {
+        printf("fail to invert: list is empty!\n");
         return -1;
     }
 
-    DLinkList p = head->next;  // 遍历指针
-    DLinkList q = NULL;        // 临时保存后继指针
-
-    // 遍历调整每个节点的prev和next
+    Node *p = plist->head->next;
+    Node *q = NULL;
     while (p != NULL) {
-        q = p->next;           // 保存当前节点的后继
-        // 交换prev和next指针
+        q = p->next;
         p->next = p->prev;
         p->prev = q;
-        // 移动到下一个节点（原后继）
         p = q;
     }
 
-    // 调整头节点的后继（指向原尾节点）
-    q = head->next;            // 原第一个节点（现在的尾节点）
-    head->next = head->next->prev;  // 头节点指向原尾节点
+    Node *oldFirst = plist->head->next;
+    plist->head->next = plist->head->prev;
+    plist->tail = oldFirst;
 
-    printf("链表已成功原地逆转！\n");
+    printf("linked list inverted successfully!\n");
     return 0;
 }
 
-// 函数功能：修正函数（兼容实验要求的ReviseList，此处复用逆转功能）
-// 入口参数：无
-// 返回值：同InvertList
-int ReviseList() {
-    return InvertList();
+void delete(List *plist, int position){
+    Node *p,*q;
+    *p = toFind(plist, position);
+    q=NULL;
+    if (p->next != plist->tail->next) {
+        p->next->prev = p->prev;
+    }
+    p->prev->next = p->next;
+    free(p);
+}
+
+void freeList(List *plist){
+    Node *p,*q;
+    for(p = plist->head ; p != plist->tail->next ; p = q){
+        q = p->next;
+        free(p);
+    }
 }

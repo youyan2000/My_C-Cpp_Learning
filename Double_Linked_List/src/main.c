@@ -1,47 +1,46 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "note.h"
+#include "list.h"
 
 int main(void) {
     int num, pos, ret;
 
     // crate list
-    List list = InitList();
-    ret = CreateList(list);
+    List Mylist = InitList();
+    ret = CreateList(&Mylist);
     
     if (ret != 0) {
         if (ret == -2) {
-            // 无有效数据时，允许重新输入
-            printf("请重新创建链表：\n");
-            CreateList(list);
+            printf("Please create linked list again: \n");
+            CreateList(&Mylist);
         } else {
             return -1;
         }
     }
 
     // output initial list
-    printf("\n=== 初始链表 ===");
-    OutputList();
+    printf("\n=== Initialized Linked List ===");
+    OutputList(&Mylist);
 
     // add elements to the specified location
-    printf("\n请输入要插入的元素和位置（格式：数值 位置）：");
+    printf("\n=== Insert Element ===");
     while (scanf("%d %d", &num, &pos) != 2) {
         while (getchar() != '\n');
-        printf("输入格式错误！请输入 数值 位置：");
+        printf("Input format error! Please enter value and position: ");
     }
-    AddtoList(num, pos);
-    printf("\n=== 插入元素后的链表 ===");
-    OutputList();
+    AddtoList(&Mylist, num, pos);
+    printf("\n=== After Inserting Element ===");
+    OutputList(&Mylist);
 
     // delete all negative numbers
-    DelListData();
-    printf("\n=== 删除负数后的链表 ===");
-    OutputList();
+    DelListData(&Mylist);
+    printf("\n=== After Deleting Negative Numbers ===");
+    OutputList(&Mylist);
 
     // reverse linked list
-    InvertList();
-    printf("\n=== 逆转后的链表 ===");
-    OutputList();
+    InvertList(&Mylist);
+    printf("\n=== Reversed Linked List ===");
+    OutputList(&Mylist);
 
     return 0;
 }

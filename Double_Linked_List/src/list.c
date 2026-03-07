@@ -2,14 +2,14 @@
 #include <stdlib.h>
 #include "list.h"
 
-Node toFind(List *plist, int position){
+Node* toFind(List *plist, int position){
     Node *p = plist->head;
     int curPos = 0;
     while (p->next != NULL && curPos < position - 1) {
         p = p->next;
         curPos++;
     }
-    return *p;
+    return p;
 }
 
 List InitList() {
@@ -20,15 +20,17 @@ List InitList() {
         }
     list.head->prev = NULL;
     list.head->next = NULL;
+    list.length = 0;
     return list;
 }
 
 int CreateList(List *plist) {
-    if (plist->head!=NULL){
-        printf("List already exists!\n");
+    if (plist == NULL){
+        printf("List hasn't initialized!\n");
         return -1;
     }
-    int data, count = 0;
+    int data = 0;
+    plist->length = 0;
     Node* p = plist->head;
     printf("Please enter data (enter -1 to end, up to 10 valid entries, -1 will not be stored): \n");
     while (1) {
@@ -40,7 +42,7 @@ int CreateList(List *plist) {
         if (data == -1) {
             break;
         }
-        if (count >= 10) {
+        if (plist->length >= 10) {
             printf("You have already entered 10 effective data, automatically end input!\n");
             break;
         }
@@ -49,20 +51,25 @@ int CreateList(List *plist) {
             printf("Memory allocation failed, failed to create linked list!\n");
             return -1;
         }
-        newNode->value = data; // set value of new node
-        newNode->next = NULL;  // new node is the new tail, so next is NULL
-        newNode->prev = p;     // link new node to the previous node
-        p->next = newNode;     // link previous node to the new node
-        p = newNode;           // push p to the new tail
-        count++;               // add count of effective data
-        plist->tail = p;       // reassign tail to the new last node
+        newNode->value = data;
+        newNode->next = NULL;
+        if (plist->length == 0) {
+            newNode->prev = NULL;
+            plist->head = newNode; 
+        } else {
+            newNode->prev = p;
+            p->next = newNode;
+        }
+        p = newNode;
+        plist->tail = p;
+        plist->length++;
     }
-    if (count == 0) {
+    if (plist->length == 0) {
         printf("No valid data, failed to create linked list!\n");
         return -2;
     }
 
-    printf("linkedlist created successfully,totally input %d effective nodes.\n", count);
+    printf("linkedlist created successfully,totally input %d effective nodes.\n", plist->length);
     return 0;
 }
 
@@ -79,13 +86,15 @@ int Addtolist(List *plist, const int number, const int position){
         printf("fail to add: list not initialized!\n");
         return -3;
     }
-    
-    Node *p;
-    *p = toFind(plist, position);
+    if (plist->length >= 10) {
+        printf("fail to add: list is full!\n");
+        return -4;
+    }
+    Node *p= toFind(plist, position);
     Node *newnode = (Node*)malloc(sizeof(Node));
     if (newnode == NULL) {
         printf("fail to add: memory allocation failed!\n");
-        return -4;
+        return -5;
     }
     newnode->value = number;
     newnode->prev = p;
@@ -95,7 +104,7 @@ int Addtolist(List *plist, const int number, const int position){
         p->next->prev = newnode;
     }
     p->next = newnode;
-
+    plist->length++;
     printf("element %d has successfully added to position %d.\n", number, position);
     return 0;
 }
@@ -124,12 +133,13 @@ int DelListData(List *plist) {
             delCount++;
         }
     }
+    plist->length -= delCount;
     printf("Delete successful, totally deleted %d negative nodes.\n", delCount);
     return 0;
 }
 
-int OutputList(List *plist){
-    if (plist->head == NULL || plist->head->next == NULL) {
+int OutputList(const List *plist){
+    if (plist == NULL || plist->head->next == NULL) {
         printf("fail to output: list is empty!\n");
         return -1;
     }
@@ -144,7 +154,7 @@ int OutputList(List *plist){
 
 
 int InvertList(List *plist) {
-    if (plist->head == NULL) {
+    if (plist == NULL) {
         printf("fail to invert: list not initialized!\n");
         return -2;
     }
@@ -152,27 +162,32 @@ int InvertList(List *plist) {
         printf("fail to invert: list is empty!\n");
         return -1;
     }
-
-    Node *p = plist->head->next;
-    Node *q = NULL;
-    while (p != NULL) {
-        q = p->next;
-        p->next = p->prev;
-        p->prev = q;
-        p = q;
+    if (plist->head == plist->tail) {
+        printf("list has only one node, no need to invert.\n");
+        return 0;
     }
 
-    Node *oldFirst = plist->head->next;
-    plist->head->next = plist->head->prev;
-    plist->tail = oldFirst;
+    Node *current = plist->head;
+    Node *temp = NULL;
+
+    while (current != NULL) {
+        temp = current->next;
+        current->next = current->prev;
+        current->prev = temp;
+        current = temp;
+    }
+
+    temp = plist->head;
+    plist->head = plist->tail;
+    plist->tail = temp;
 
     printf("linked list inverted successfully!\n");
     return 0;
 }
 
 void delete(List *plist, int position){
-    Node *p,*q;
-    *p = toFind(plist, position);
+    Node *q;
+    Node *p = toFind(plist, position);
     q=NULL;
     if (p->next != plist->tail->next) {
         p->next->prev = p->prev;
@@ -181,10 +196,17 @@ void delete(List *plist, int position){
     free(p);
 }
 
-void freeList(List *plist){
-    Node *p,*q;
-    for(p = plist->head ; p != plist->tail->next ; p = q){
-        q = p->next;
-        free(p);
+void freeList(List *plist) {
+    if (plist == NULL || plist->head == NULL) return;
+    Node *current = plist->head;
+    Node *next;
+
+    for (int i = 0; i < plist->length; i++) {
+        next = current->next;
+        free(current);
+        current = next;
     }
+    plist->head = NULL;
+    plist->tail = NULL;
+    plist->length = 0;
 }

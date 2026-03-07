@@ -22,95 +22,80 @@ protected:
     char gender[MAX_GENDER];
     char major[MAX_MAJOR];
     char position[MAX_POSITION];
+
 public:
-    // 构造函数
     Member();
     Member(const char* n, const char* g, const char* m, const char* p);
-
-    // 虚析构函数（用于多态）
     virtual ~Member();
 
-    // 获取成员信息的接口（封装：保护数据不被直接访问）
-    const char* getName() const;
-    const char* getGender() const;
-    const char* getMajor() const;
-    const char* getPosition() const;
-
-    // 设置成员信息的接口
+    const char *getName() const;              // Obtain Name
+    const char *getGender() const;            // Obtain Gender
+    const char *getMajor() const;             // Obtain Major
+    const char *getPosition() const;          // Obtain Position
+    virtual const char *getGroup() const;     // Obtain group (unique to students, teachers leave blank)
+    virtual const char *getStudentID() const; // Obtain student ID (unique to students, teachers return empty)
+        
     void setName(const char* n);
     void setGender(const char* g);
     void setMajor(const char* m);
     void setPosition(const char* p);
 
-    // 纯虚函数：导出为CSV行（子类必须实现）
-    virtual void toCSV(char* buffer, int bufferSize) = 0;
-    // 纯虚函数：显示成员信息
-    virtual void displayInfo() = 0;
-    // 纯虚函数：获取组别（学生特有，教师返回空）
-    virtual const char* getGroup() const;
-    // 纯虚函数：获取学号（学生特有，教师返回空）
-    virtual const char* getStudentID() const;
+    virtual void toCSV(char *buffer, int bufferSize) = 0; // Outport as CSV rows
+    virtual void displayInfo() = 0;                       // Display member information
 };
 
 // teacher(derived class A)
 class Teacher : public Member {
 public:
-    // 构造函数
     Teacher();
     Teacher(const char* n, const char* g, const char* m, const char* p);
 
-    // 实现纯虚函数
     void toCSV(char* buffer, int bufferSize) override;
     void displayInfo() override;
 };
 
-// 派生类：学生
+// student(derived class B)
 class Student : public Member {
 private:
     char group[MAX_GROUP];
     char studentID[MAX_STUDENT_ID];
 public:
-    // 构造函数
     Student();
     Student(const char* n, const char* g, const char* m, const char* p, 
             const char* gr, const char* id);
 
-    // 封装：获取/设置组别和学号
-    const char* getGroup() const override;
-    const char* getStudentID() const override;
+    const char *getGroup() const override;
+    const char *getStudentID() const override;
     void setGroup(const char* gr);
     void setStudentID(const char* id);
 
-    // 实现纯虚函数
     void toCSV(char* buffer, int bufferSize) override;
     void displayInfo() override;
 };
 
-// 实验室类：管理所有成员
+// manage all members (derived class C)
 class Lab {
 private:
-    Member* members[MAX_MEMBERS];  // 多态数组：存储教师/学生对象
-    int memberCount;               // 当前成员数量
-    const char* csvFilePath;       // CSV文件路径
-    void sortMembers();    // 排序辅助函数：按组别、职位排序
-
+    Member *members[MAX_MEMBERS]; // Array for members storage
+    int memberCount;              // current number of members
+    const char *csvFilePath;      // CSV file path
+    void sortMembers();           // Sorting auxiliary function
 public:
-    // constructor
     Lab(const char* path);
-    // destructor
     ~Lab();
-    // 加载/保存CSV文件
-    bool loadFromCSV();
-    bool saveToCSV();
-    // 成员管理功能
-    bool addMember(Member* newMember);
-    Member* findMember(const char* name);
-    bool deleteMember(const char* name);
-    void showAllMembers();
-    void countMembers();
+
+    bool loadFromCSV(); // Save CSV file
+    bool saveToCSV();   // Load CSV file
+
+    bool addMember(Member *newMember);    // Add member
+    Member *findMember(const char *name); // Query member information by name
+    bool deleteMember(const char *name);  // Delete member by name
+    void showAllMembers();                // Show all mumbers
+    void showAllStudents();               // Show all students
+    void showAllTeachers();               // Show all teachers
+    void countMembers();                  // Statistics number of teachers and students
 };
 
-// menu function declaration
-void showMenu();
+void showMenu(); // Show the menu
 
 #endif

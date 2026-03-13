@@ -1,18 +1,25 @@
+// #include <stdio.h>
+
+// int main(){
+// 	int price = 0;
+// 	const int amount=1000;
+// 	int change;
+// 	double a;
+// 	printf("HELLO WORLD!??\n");
+// 	printf("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\n");
+// 	scanf_s("%d",&price);
+// 	printf("Ð¡a\n");
+// 	scanf_s("%lf",&a);
+// 	price=price+30;
+// 	change = amount - price;
+// 	printf("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç®Îª%d\n%lf\n",change,(a/2.32));
+	
+// 	return 0;
+// }
 #include <stdio.h>
-
 int main(){
-	int price = 0;
-	const int amount=1000;
-	int change;
-	double a;
-	printf("HELLO WORLD!??\n");
-	printf("ÇëÊäÈë½ð¶î\n");
-	scanf_s("%d",&price);
-	printf("Ð¡a\n");
-	scanf_s("%lf",&a);
-	price=price+30;
-	change = amount - price;
-	printf("ÄúµÄÁãÇ®Îª%d\n%lf\n",change,(a/2.32));
-
-	return 0;
+  char h;
+  scanf("%c",&h);
+  printf("%d",h);
+  return 0;
 }

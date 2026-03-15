@@ -4,23 +4,22 @@
         {
             "label": "Create Bin Directory",
             "type": "shell",
-            "command": "if not exist \"${workspaceFolder}\\bin\" mkdir \"${workspaceFolder}\\bin\"",
-            "windows": {
-                "command": "if not exist \"${workspaceFolder}\\bin\" mkdir \"${workspaceFolder}\\bin\""
-            },
+            "command": "mkdir -p \"${workspaceFolder}/bin\"",
             "problemMatcher": []
         },
         {
             "type": "cppbuild",
-            "label": "C/C++: gcc.exe build to bin",
-            "command": "H:\\GNU_C_Compiler\\bin\\gcc.exe",
+            "label": "C/C++: gcc build to bin",
+            "command": "/usr/bin/gcc",
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
                 "${file}",
-                "-I../inc",
+                "-I${workspaceFolder}/inc",
                 "-o",
-                "../bin/${fileBasenameNoExtension}.exe"
+                "${workspaceFolder}/bin/${fileBasenameNoExtension}",
+                "-Wall",
+                "-Wextra"
             ],
             "options": {
                 "cwd": "${fileDirname}"
@@ -32,7 +31,7 @@
                 "kind": "build",
                 "isDefault": true
             },
-            "detail": "compiler: H:\\GNU_C_Compiler\\bin\\gcc.exe",
+            "detail": "compiler: /usr/bin/gcc",
             "dependsOn": "Create Bin Directory"
         }
     ]

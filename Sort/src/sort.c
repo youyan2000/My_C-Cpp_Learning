@@ -64,16 +64,26 @@ ARR StalinSort(ARR arr){
     if (is_sorted(&arr)) return arr;
 
     ARR sortedArr;
-    sortedArr.data[0] = arr.data[0];
-    sortedArr.len = 1;
+    sortedArr.len = 0;
 
-    for (int i = 1; i < arr.len; i++) {
-        if (arr.data[i] >= sortedArr.data[sortedArr.len - 1]) {
-            sortedArr.data[sortedArr.len] = arr.data[i];
-            sortedArr.len++;
+    bool first_element = true;
+    int current_max = 0; 
+
+    for (int i = 0; i < arr.len; i++) {
+        int val = arr.data[i];
+        if (first_element || val >= current_max) {
+            if (sortedArr.len < MAX_SORT_LEN) {
+                sortedArr.data[sortedArr.len] = val;
+                sortedArr.len++;
+                
+                current_max = val;
+                first_element = false;
+            }
         }
     }
-    
+    if (sortedArr.len == 0) {
+        printf("No alive elements found.\n");
+    }
     return sortedArr;
 }
 

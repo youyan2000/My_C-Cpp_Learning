@@ -13,9 +13,11 @@
 
 # Visual Studio / VSCode
 .vscode/
-.ipch/
+ipch/
 *.sdf
 *.suo
+*.sln
+*.ipch
 *.user
 *.aps
 *.ncb

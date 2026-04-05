@@ -5,22 +5,14 @@
             "name": "C Debug (GDB)",
             "type": "cppdbg",
             "request": "launch",
-<<<<<<< HEAD
             "program": "${workspaceFolder}/bin/${fileBasenameNoExtension}",
-=======
-            "program": "${workspaceFolder}\\bin\\${fileBasenameNoExtension}.exe",
->>>>>>> cpp-homework/main
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",
-<<<<<<< HEAD
             "miDebuggerPath": "/usr/bin/gdb",
-=======
-            "miDebuggerPath": "H:\\GNU_C_Compiler\\bin\\gdb.exe",
->>>>>>> cpp-homework/main
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",
@@ -28,14 +20,7 @@
                     "ignoreFailures": true
                 }
             ],
-<<<<<<< HEAD
             "preLaunchTask": "C/C++: gcc build to bin"
         }
     ]
 }
-=======
-            "preLaunchTask": "C/C++: g++.exe build active file to bin"
-        }
-    ]
-}
->>>>>>> cpp-homework/main

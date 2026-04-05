@@ -59,3 +59,4 @@ build/
 *.7z
 *.tar
 *.gz
+.obsidian/

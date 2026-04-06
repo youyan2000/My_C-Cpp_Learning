@@ -1,29 +1,4 @@
 ﻿#include <stdio.h>
-
-/*There are four numbers: 1, 2, 3, and 4. How many different three-digit numbers can be formed without repeating any digit? And what are they?*/
-//int main(){
-//	int a=1,b=1,c=1,number=1;
-//
-//	while(a<=4){
-//		while(b<=4){
-//			while(c<=4){
-//				if(a!=b&&a!=c&&b!=c){
-//					printf("%d%d%d\n",a,b,c);
-//					number++;
-//					}
-//				c++;
-//			}
-//			c=1;
-//			b++;
-//		}
-//		c=1,b=1;
-//		a++;
-//	}
-//	printf("There are a total of %d.\n",number);
-//}
-
-
-
 /*The program reads in a positive 3-digit number each time, and then outputs the number in reverse order of its digits. Note: If the input number ends with a zero, the output should not have leading zeros. For example, if the input is 700, the output should be 7.*/
 // int main(){
 // 	int g=1,a,b,c;
@@ -187,43 +162,4 @@
 // 	m/=a;
 // 	s/=a;
 // 	printf("%d/%d",s,m);
-// }
-
-
-
-/*Read the numbers*/
-// int main(){
-	// int in,z,x,num,mask=1;
-	// scanf_s("%d",&in);
-	// if (in<0){printf("fu " );in=-in;}
-	// x=in;
-	
-	// while(x>9){
-	// 	x/=10;
-	// 	mask*=10;
-	// }
-	// x=in;
-	// do{
-	// 	num=x/mask;
-	// 	switch (num)
-	// 	{
-	// 	case 0:printf("ling");break;
-	// 	case 1:printf("yi");break;
-	// 	case 2:printf("er");break;
-	// 	case 3:printf("san");break;
-	// 	case 4:printf("si");break;
-	// 	case 5:printf("wu");break;
-	// 	case 6:printf("liu");break;
-	// 	case 7:printf("qi");break;
-	// 	case 8:printf("ba");break;
-	// 	case 9:printf("jiu");break;
-	// 	}
-	// 	x = x%mask;
-	// 	mask/=10;
-	// 	if (mask>0){
-	// 		printf(" ");
-	// 	}
-	// }while(mask>0);
-
-	// return 0;
 // }

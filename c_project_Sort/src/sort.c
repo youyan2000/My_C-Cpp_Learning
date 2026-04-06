@@ -9,31 +9,31 @@
 #include "sort.h"
 
 ARR CreateSort(){
-    int i;
-    ARR arr;
-    arr.len = 0;
-    for(i=0; i< MAX_SORT_LEN; i++){
-        arr.data[i] = 0;
-    }
-    printf("please enter the elements (enter -1 to stop):\n");
-    for (i = 0; i < MAX_SORT_LEN; i++) {
-        int input_val;
+  int i;
+  ARR arr;
+  arr.len = 0;
+  for(i=0; i< MAX_SORT_LEN; i++){
+    arr.data[i] = 0;
+  }
+  printf("please enter the elements (enter -1 to stop):\n");
+  for (i = 0; i < MAX_SORT_LEN; i++) {
+    int input_val;
         
-        if (scanf("%d", &input_val) != 1) {
-            printf("\n[Error] Invalid input detected. Stopping input.\n");
-            int c;
-            while ((c = getchar()) != '\n' && c != EOF); 
-            break;
-        }
-
-        if (input_val == -1) {
-            break;
-        }
-
-        arr.data[i] = input_val;
-        arr.len++;
+    if (scanf("%d", &input_val) != 1) {
+      printf("\n[Error] Invalid input detected. Stopping input.\n");
+      int c;
+      while ((c = getchar()) != '\n' && c != EOF); 
+      break;
     }
-    return arr;
+
+    if (input_val == -1) {
+      break;
+    }
+    
+    arr.data[i] = input_val;
+    arr.len++;
+  }
+  return arr;
 }
 
 ARR BubbleSort(ARR arr) {

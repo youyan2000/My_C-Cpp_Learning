@@ -48,6 +48,10 @@ flowchart LR
 ### 3.汇编
 生成`.obj`机器二进制语言
 
+### debug与release的区别
+debug为调试的便捷对代码进行了调整
+release为了运行的速度，加入了加速库修改了代码
+
 ## 链接(linker)
 
 ### *报错*

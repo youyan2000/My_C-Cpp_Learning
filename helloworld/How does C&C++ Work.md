@@ -29,26 +29,40 @@ flowchart LR
 
 ## 编译(complier)
 
-### 预处理
+### 1.预处理
 `# include <>` : 将<>中的文件直接粘贴到指定位置
 `# define A b` : 将所有的b用A替换
-### 编译
+`# pragma once` : 确保你的头文件在同一源文件下只会被include一次
+标准头文件结构 : 
+```h
+#ifndef MY_HEADER_H
+#define MY_HEADER_H
+/*your funcation*/
+#endif
+```
+
+### 2.编译
 生成`.asm`汇编文件，操作寄存器
 调用函数：`call signature of funcation`signature of funcations是函数的签名，看起来是一串乱码。
-### 汇编
+
+### 3.汇编
 生成`.obj`机器二进制语言
 
 ## 链接(linker)
+
 ### *报错*
 编译阶段报错：C
 链接阶段报错：LINK
+
 ### 选择函数入口
 通常默认是main()函数
+
 ### 读取函数声明
 - 函数的 **声明(declaration)** 需要和函数的 **定义(definition)** 相同的名字
 - static函数可以仅在单个.c文件中生存
 - 在同一.c文件中不要反复声明/定义（要当心include的.h文件）
 理论上，声明必须出现在.h中；定义决不能出现在.c中
+**头文件的作用** : 声明函数（c的标准库以.h结尾，而c++的标准库没有后缀名）
 
 ## GNU(GNU's Not Unix) C/C++ Compiler
 

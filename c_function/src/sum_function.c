@@ -1,7 +1,5 @@
 ﻿#include <stdio.h>
 
-
-/*sum function*/
 int sum(int begin,int end){
     int i,sum=0;
     for (i=begin ; i<end ; i++){

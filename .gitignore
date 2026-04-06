@@ -23,6 +23,8 @@ ipch/
 *.ncb
 *.opendb
 *.opensdf
+*.vcxproj
+*.vcxproj.filters
 *.VC.db
 *.VC.VC.opendb
 

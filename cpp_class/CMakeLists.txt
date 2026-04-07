@@ -1,11 +1,20 @@
 cmake_minimum_required(VERSION 3.11)
 
-project("BoxClass")
+# project("BoxClass")
+
+# include_directories(./inc)
+
+# add_executable(boxclass 
+#                ./src/box.cpp
+#                ./src/log.cpp
+#                ./src/main.cpp
+# )
+
+project("SoldierClass")
 
 include_directories(./inc)
 
-add_executable(boxclass 
-               ./src/box.cpp
-               ./src/log.cpp
+add_executable(soldierclass 
+               ./src/soldier.cpp
                ./src/main.cpp
 )

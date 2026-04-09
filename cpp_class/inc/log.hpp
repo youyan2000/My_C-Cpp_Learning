@@ -10,7 +10,7 @@ class Log{
     };
   private:
     Level m_Level = INFO;
-  private:
+  public:
     void SetLevel(Level level);
     void Warn(const std::string& message);
     void Info(const std::string& message);

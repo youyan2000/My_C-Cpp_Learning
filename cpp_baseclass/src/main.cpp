@@ -1,17 +1,18 @@
 #include <iostream>
 #include "space.hpp"
 
-using namespace std;
+int main(void){
+  RightTriangle Tri;
+  Rectangle Rect;
+ 
+  Tri.setWidth(5);
+  Tri.setHeight(8);
+  Rect.setWidth(5);
+  Rect.setHeight(8);
+ 
+  //Output the area of the object
+  std::cout << "Total area: " << Tri.getArea() << std::endl;
+  std::cout << "Total area: " << Rect.getArea() << std::endl;
 
-int main(void)
-{
-   Rectangle Rect;
- 
-   Rect.setWidth(5);
-   Rect.setHeight(7);
- 
-   //Output the area of the object
-   cout << "Total area: " << Rect.getArea() << endl;
- 
-   return 0;
+  return 0;
 }

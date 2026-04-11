@@ -11,15 +11,17 @@ Particular **分有 participate** Form。
 **Instance** 就是 **分有理念的个体**
 （实例不对象，因为白马非马）
 
-## 访问限制 setting limits(可见性)
-public 全局课被调用
-private 仅在成员函数内可以被调用
-protected 子类和成员函数课调用
-
 **class与structure的区别**
 - class的成员默认是private；structure的成员默认是public
 - structure常用于表达一种变量结构（如向量类）
 - class常用 **继承 inheritance**
+
+## 访问限制 setting limits(可见性 visiblity)
+- public 全局课被调用
+- private 仅在成员函数内可以被调用
+- protected 子类和成员函数课调用
+
+可见性不会影响代码本身的编译链接和可执行文件，只会影响人类读者和编辑者的读写
 
 ## static
 ### 结构体/类中的class static
@@ -109,4 +111,6 @@ Dynamic Dispatch 动态联编 通过**虚函数表**实现编译
 纯虚函数允许我们在基类不进行定义，并强制我们在派生类中实现它
 纯虚函数的声明必须等于0
 在其他语言，我们一般称之为**接口函数**interface function
+
+衍生类的衍生类1，不可以重定义基类的纯虚函数，但是可以调用衍生类重写的函数
 

@@ -1,4 +1,50 @@
-# 类
+# 类 class
+类本质上是一套采用封装的管理代码的方案，他把一部分管理工作交给编译器，而非人工的标识和说明
+
+传参：
+- C中通过结构体给函数传参
+- C++中一个类中的变量就被当作一个结构体传入类中的函数
+
+访问限制：
+- C中通过.h文件中放公开的声明，.c文件中用static放私有的变量
+- C++中可以在类里面的public放公开声明，private里放私有变量和函数
+
+命名空间：
+- C中靠函数名的区别区分不同物实体的构造实现和析构函数
+- C++中可以通过不同的类的命名空间区分不同的物理实体
+
+e.g.
+c语言封装实现
+```c
+typedef struct{
+  int32_t pin_num;
+  bool light_level;
+}led_t
+static void pin_write(){};
+void led_on(led_t *me){
+  pin_write(me->pin_num,
+            me->light_level);
+}
+led_t red = {15 , 1};
+led_on(&red);
+```
+c++封装实现
+```cpp
+class Led{
+  private:
+    void pin_write(){};
+  public:
+    int32_t pin_num;
+    bool light_level;
+    void on(){
+      pin_write(this->pin_num,
+                this->light_level);
+    }
+}
+Led red (15 , 1);
+red.on();
+```
+
 ## 基本概念
 **类 Class** 是把数据和功能组合在一起的一种方法
 **对象 Object** 是类构成的变量
@@ -113,4 +159,60 @@ Dynamic Dispatch 动态联编 通过**虚函数表**实现编译
 在其他语言，我们一般称之为**接口函数**interface function
 
 衍生类的衍生类1，不可以重定义基类的纯虚函数，但是可以调用衍生类重写的函数
+
+## 成员初始化列表 member initializer list
+本质是为了简化初始化成员的过程,让初始化的过程变得更加清晰
+```cpp
+class Example {
+  private:
+    int a;
+    const int b;   
+  public:
+    // 这里的 : a(x), b(y) 就是 member initializer list
+    Example(int x, int y) : a(x), b(y) {
+      // 构造函数体
+    }
+};
+```
+事实上，即使我们不使用成员初始化列表，而在构造函数内进行初始化，那么这个对象会被初始化两遍
+
+## 初始化对象 intiial object
+### 在栈上创建
+创建方法：
+- 调用默认初始化函数创建，形如`<对象类型> <对象名>`
+  e.g.
+  ```cpp
+  Entity entity
+  ```
+- 调用用户自定义初始化函数创建，形如`<对象类型> <对象名> = <对象类型> (<初始化参数>)`或`<对象类型> <对象名> (<初始化参数>)`
+  e.g.
+  ```cpp
+  Entity entity = Entity (2026)
+  //Entity entity (2026)
+  ```
+
+优点：便捷，直观，自动分配和释放内存
+弊端：不能在生存期外被调用，栈的内存有限需要节约
+
+### 在堆上创建
+我们总是需要在某个代码块外调用在代码块内建立的对象，所以需要在堆上手动创建和分配对象
+
+创建方法：
+- 调用默认初始化函数创建，形如`<对象类型>* <对象名> = new <对象类型>`
+  e.g.
+  ```cpp
+  Entity* entity = new Entity
+  ```
+- 调用用户自定义初始化函数创建，形如`<对象类型>* <对象名> = new <对象类型> (<初始化参数>)`
+  e.g.
+  ```cpp 
+  Entity* entity = new Entity (2026)
+  ```
+  
+释放方法：`delete <对象名>`
+  e.g.
+  ```cpp
+  delete entity
+  ```
+
 

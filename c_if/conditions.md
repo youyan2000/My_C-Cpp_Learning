@@ -6,14 +6,14 @@
 CPU 根本看不到`{}`，只看到指令数量。
 如果你只有一行命令需要执行，且程序简洁短小，不加`{}`是完全没有问题的。
 
-### **if语句**
+### if语句
 ```c
 if(boolean_expression){
   /* 如果布尔表达式为真将执行的语句 */
 }
 ```
 
-### **if-else语句**
+### if-else语句
 ```c
 if(boolean_expression){
   /* 如果布尔表达式为真将执行的语句 */
@@ -22,7 +22,7 @@ if(boolean_expression){
 }
 ```
 
-### **if-elseif语句**
+### if-elseif语句
 ```c
 if(boolean_expression_1){
   /* 如果布尔表达式1为真将执行的语句 */
@@ -35,6 +35,11 @@ if(boolean_expression_1){
 **注**：
 事实上，我们不能把elseif当做一种语法，他只是一个巧妙的省略了“{}”结构
 `if{}else if{}`可以完全等同于`if{}else{if{}}`
+
+### 三目运算符
+用于更简明地实现条件选择赋值语句，但如果条件过于复杂而违背了简明的要求，那么就别用这个
+` ? :`（条件 ? 真 : 假）
+e.g.`max = (a > b) ? a : b;`
 
 ### switch语句
 ```c

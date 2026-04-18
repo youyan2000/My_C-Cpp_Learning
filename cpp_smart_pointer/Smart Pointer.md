@@ -1,6 +1,6 @@
 # 智能指针
 智能指针 Smart Pointer 是一种包装了原始指针的对象。它们通过 RAII（资源获取即初始化）机制，自动管理指针生命周期，从而有效防止内存泄漏和野指针(悬空指针)
-要使用他，你需要include <memory>
+要使用他，你需要`# include <memory>`
 
 ## 核心优势
 - 自动释放：超出作用域时自动析构并释放内存
@@ -30,7 +30,7 @@ std::shared_ptr<MyClass> sharedptr = std::make_shared<MyClass>();
 
 ### 3️⃣ weak_ptr 弱引用指针
 `shared_ptr`的引用是一种强引用，他在引用的同时，增加引用计数，可以保障被引用指针不死亡
-而 `weak_ptr` 是弱引用的，不增加引用计数，即使被引用指针死亡了，他也不会死亡
+而 `weak_ptr` 是弱引用的，不增加引用计数，即使被引用指针死亡了，他也不会死亡 (所以使用弱引用指针时，我们通常需要时刻询问对象是否还存在)
 用法：
 ```cpp
 auto sp = std::make_shared<MyClass>();

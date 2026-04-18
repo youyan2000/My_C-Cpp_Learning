@@ -90,18 +90,6 @@ gcc -o HelloWorld.exe HelloWorld-c.c
 g++ -o HelloWorld.exe HelloWorld-cpp.cpp
 gcc -o HelloWorld.exe HelloWorld-c.c -lstdc++
 ```
-**库文件小科普**
-- 库一般分静态库和动态库. 静态库在编译链接时与可执行文件合为一体, 动态库单独作为文件供可执行文件调用
-  - 静态库直接装载到内存, 更占用内存资源, 但执行速度快
-  - 动态库只有在用到的时候被装载到内存中, 且可以被多个不同的
-程序调用. 因此节省资源, 但调用需要一定的装载时间
-- 常见扩展名
-  - Windows系统
-    - 静态库: .lib, Library
-    - 动态库: .dll, Dynamic Link Library
-  - Linux系统
-    - 静态库: .a, Archive
-    - 动态库: .so, Shared Object
 
 ### 单个可执行文件的逐步生成
 

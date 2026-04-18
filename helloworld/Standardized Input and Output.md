@@ -1,4 +1,4 @@
-# 标准输入输出
+# 标准化输入输出
 ## printf
 - 作用：将指定数据按照自定义格式，输出到屏幕（标准输出设备）。
 - 基本语法：`printf("%[flags][width][.prec][hIL]type", output);`

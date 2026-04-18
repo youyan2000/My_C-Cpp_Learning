@@ -1,10 +1,108 @@
 # 函数调用
-
 ## 函数的根本作用：功能复用
 任何一个“运算符”本质上都是一个函数
 
-## 调用流程
+## 怎么实现函数的多返回值？
+### 方案一(也是最佳方案) struct
+创造一个struct，包含多个返回值类型，让函数返回这个struct
+可读性最好，每个字段都有名字；无额外拷贝开销（现代编译器会优化）
+例如：
+```c
+struct Result {
+  int sum;
+  int diff;
+  double product;
+};
 
+Result compute(int a, int b) {
+  Result r;
+  r.sum = a + b;
+  r.diff = a - b;
+  r.product = a * b;
+  return r;
+}
+
+int main(){
+  Result res = compute(10, 3);
+}
+```
+
+### 方案二 reference/point
+给函数传入参数的时候，给他几个引用或者指针，把要返回的值直接等于给这几个引用或者指针
+从性能角度看，这是最高效的方法，因为它没有进行任何的复制工作，而仅仅是给多个已有的变量赋值
+例如：
+```c
+void compute(int a, int b, int& sum, int& diff, double& product) {
+  sum = a + b;
+  diff = a - b;
+  product = a * b;
+}
+
+int main(){
+  int s, d;
+  double p;
+  compute(10, 3, s, d, p);
+}
+```
+
+### 方案三 array/vector
+返回一个数组，这个数组里包含所要返回的值
+类型必须相同；需要靠下标或约定访问，可读性差
+例如：
+```cpp
+#include <vector>
+vector<int> compute(int a, int b) {
+  return {a + b, a - b, a * b};
+}
+
+int main(){
+  vector<int> res = compute(10, 3);
+}
+```
+
+### 方案四 tuple
+返回一个元组，可以包含不同类型的多个值，用结构化绑定（C++17）方便拆解
+缺点字段没有名字，只能靠顺序读或`std::get`
+例如：
+```cpp
+#include <tuple>
+tuple<int, int, double> compute(int a, int b) {
+  return {a + b, a - b, a * b};
+}
+
+int main(){
+  // 使用 (C++17)
+  auto [sum, diff, product] = compute(10, 3);
+  // 或 C++11/14 用 tie
+  int s, d;
+  double p;
+  tie(s, d, p) = compute(10, 3);
+}
+```
+
+### 方案五 pair
+当只需要返回两个值时，`pair`是最轻量级的`tuple`
+`pair`包含`first` / `second` 成员，也支持结构化绑定
+例如：
+```cpp
+#include <utility> 
+
+pair<int, double> compute(int a, int b) {
+  return {a + b, a * b};
+}
+
+int main() {
+  // C++17 结构化绑定
+  auto [sum, product] = compute(10, 3);
+  
+  // 传统方式
+  pair<int, double> res = compute(10, 3);
+  int s = res.first;
+  double p = res.second;
+}
+```
+
+## 调用流程
 **CPU用到的寄存器**
 - ESP（Extended Stack Pointer）：栈指针寄存器，始终指向栈顶（最上面的栈帧的顶部），入栈时ESP减小（因为栈从高地址向低地址生长），出栈时ESP增大。
 - EBP（Extended Base Pointer）：基址指针寄存器，始终指向当前函数栈帧的底部，用于定位当前栈帧中的参数、局部变量（相当于栈帧的“锚点”）。

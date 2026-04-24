@@ -36,6 +36,7 @@ x86/
 bin/
 obj/
 build/
+test/
 
 # 临时文件
 *.tmp

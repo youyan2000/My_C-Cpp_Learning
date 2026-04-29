@@ -38,6 +38,7 @@ void PrintArr(ARR arr);
  * 输出: {1, 2, 4, 5, 8}
  */
 ARR BubbleSort(ARR arr);
+
 /**
  * @brief 斯大林排序 (Stalin Sort)。
  * 
@@ -68,6 +69,7 @@ ARR BubbleSort(ARR arr);
  * 输出: {1, 5, 6} (长度为 3，原数据 2, 3, 4, 0 丢失)
  */
 ARR StalinSort(ARR arr);
+
 /**
  * @brief 侏儒排序 (Gnome Sort)。
  * 
@@ -227,6 +229,7 @@ ARR ShellSort(ARR arr);
  * "如果这个函数在你的电脑上跑完了长度为 15 的数组，请立刻去买彩票，因为你刚刚战胜了数万亿分之一的概率。"
  */
 ARR BogoSort(ARR arr);
+
 /**
  * @brief 摸鱼排序 (Slack Sort)。
  * 
@@ -247,6 +250,7 @@ ARR BogoSort(ARR arr);
  * 输出: {2, 3, 4, 5, 6} (原数据 10, 8, 9 丢失，3, 4, 6 为伪造)
  */
 ARR SlackSort(ARR arr);
+
 /**
  * @brief 邓小平排序（Den Sort）
  * 
@@ -265,6 +269,7 @@ ARR SlackSort(ARR arr);
  *  可能输出2（seed=123）: [1, 2, 5, 6, 7, 12, 8, 12, 9, 12, 11, 12]
  */
 ARR DenSort(ARR arr);
+
 /**
  * @brief 睡眠排序 (Sleep Sort)。
  * 
@@ -300,6 +305,7 @@ ARR DenSort(ARR arr);
  * "这是唯一一种排序速度取决于数值大小而不是数据量的算法。如果你的数组里有一个 10 亿，你的程序就要跑 31 年。"
  */
 void SleepSort(ARR arr);
+
 /**
  * @brief 将军排序 (General Sort)。
  * 

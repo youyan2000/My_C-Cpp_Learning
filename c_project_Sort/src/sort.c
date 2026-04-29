@@ -37,26 +37,26 @@ ARR CreateSort(){
 }
 
 ARR BubbleSort(ARR arr) {
-    if (arr.len <= 1) return arr;
-    if (is_sorted(&arr)) return arr;
+  if (arr.len <= 1) return arr;
+  if (is_sorted(&arr)) return arr;
 
-    for (int i = 0; i < arr.len - 1; i++) {
-        int swapped = 0; 
-        
-        for (int j = 0; j < arr.len - 1 - i; j++) {
-            if (arr.data[j] > arr.data[j + 1]) {
-                int temp = arr.data[j];
-                arr.data[j] = arr.data[j + 1];
-                arr.data[j + 1] = temp;
-                swapped = 1;
-            }
-        }
-        
-        if (swapped == 0) {
-            break;
-        }
+  for (int i = 0; i < arr.len - 1; i++) {
+    int swapped = 0; 
+    
+    for (int j = 0; j < arr.len - 1 - i; j++) {
+      if (arr.data[j] > arr.data[j + 1]) {
+        int temp = arr.data[j];
+        arr.data[j] = arr.data[j + 1];
+        arr.data[j + 1] = temp;
+        swapped = 1;
+      }
     }
-    return arr;
+    
+    if (swapped == 0) {
+      break;
+    }
+  }
+  return arr;
 }
 
 ARR StalinSort(ARR arr){

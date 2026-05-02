@@ -17,9 +17,16 @@ std::cout << f << std::endl; // 可能输出 1.0
 严格来说，只有**按位解释**才是类型双关，而值的类型转换并不是，但是我们并没有这么严格
 - - -
 ## 常见实现方式
-### 指针强转(混乱邪恶)
-```cpp
+### 强转(混乱邪恶)
+这是我们在C语言中较为常见的方式，比方说
+*指针强转*
+```c
 float f = *(float*)&a;
+```
+或者可以是
+*直接强转*
+```c
+float f = (int)a;
 ```
 问题：
 - 违反 严格别名规则（strict aliasing rule）
@@ -49,7 +56,7 @@ std::memcpy(&f, &a, sizeof(float));
 编译器通常会优化成无开销
 但是栈的空间总是有限的，不能无限制地申请内存
 
-### cast
+### casting 类型转换
 cast是一种有效的类型双关方式
 他们类型安全，编译期可优化，语义清晰
 虽然他们中部分没有这么善良，但他们名字的特殊性让他在程序中可以被搜索到，所以我们可以更简单地注意到他们的使用
@@ -61,30 +68,29 @@ cast是一种有效的类型双关方式
 | `dynamic_cast`     | 运行时类型检查        | 中立善良：严格遵守类型系统，还会检查 |
 | `const_cast`       | 去掉/添加 const       | 混乱中立：改规则，但不完全破坏       |
 | `static_cast`      | 值转换 / 合法类型转换 | 绝对中立：最“正常”的转换           |
-🟩 std::bit_cast（C++20）——类型双关首选
+
+#### `bit_cast`（C++20）类型双关首选
+示例
+```cpp
 #include <bit>
 
 int a = 0x3f800000;
 float f = std::bit_cast<float>(a);
+```
 
-✔ 特点：
+特点：
+- 按位复制（bit-level）
+- 类型安全
+- 编译期可优化（零开销）
 
-按位复制（bit-level）
-类型安全
-编译期可优化（零开销）
+**要求**：
+`sizeof(T) == sizeof(U)`
 
-✔ 要求：
-
-sizeof(T) == sizeof(U)
-
-👉 本质：
-
-安全版类型双关
-
-🟥 reinterpret_cast —— 底层工具（危险）
+#### `reinterpret_cast`
+```cpp
 int a = 0x3f800000;
 float* f = reinterpret_cast<float*>(&a);
-
+```
 ❗ 风险：
 
 违反严格别名规则
@@ -100,48 +106,56 @@ auto reg = reinterpret_cast<volatile uint32_t*>(0x40021000);
 嵌入式寄存器
 内存映射
 硬件访问
-⚪ static_cast —— 默认选择
+#### `static_cast`
+```cpp
 double value = 5.43;
 float f = static_cast<float>(value);
-
-✔ 行为：
-
+```
+特点：
 数值转换
-编译期完成
+编译期完成（几乎没有开销）
 
-❗ 注意：
+#### `dynamic_cast`
+用于多态类型之间的安全类型转换（尤其是向下转型）
 
-int a = 0x3f800000;
-float f = static_cast<float>(a); // ❌不是类型双关
-🟦 dynamic_cast —— 多态安全
-class Base {
-public:
-    virtual ~Base() {}
+如果我们在做一些非法的转换：
+比方说，一个*角色*父类有*玩家*和*敌人*两子类，我们妄图把一个*敌人*转成*角色*再转成*玩家*，这显然是非法的
+
+**Runtime Type Information, RTTI, 运行时类型信息**会储存实体的真实类型
+非法的时候`dynamic_cast`就会给我们返回`nullptr`；合法的时候就会给我们返回转换后的指针
+（我们当然可以利用这个特性，来检测一个实体的类型究竟是什么）
+
+示例：
+```cpp
+class Role {
+  public:
+    virtual ~Role() {}
 };
 
-class Derived : public Base {};
+class Player : public Role {};
+class Enemy : public Role {};
 
-Base* b = new Derived();
-Derived* d = dynamic_cast<Derived*>(b);
+Role* player = new Player();
+Role* enemy  = new Enemy();
 
-✔ 特点：
+Player* p1 = dynamic_cast<Player*>(player); // ✅ 成功
+Player* p2 = dynamic_cast<Player*>(enemy);  // ❌ nullptr
 
-运行时检查
-安全但慢
-✔ 失败返回：
+/*判断一个基类指针实际指向的派生类类型*/
+if (Player* p = dynamic_cast<Player*>(role)) {
+  // 是 Player
+}
+```
 
-nullptr
-🟨 const_cast —— 改 const
+特点：
+运行时检查，并计算
+不是在编译的时候完成，安全，但也因此有算力的开销
+
+#### `const_cast` 
+修改const（因此，使用前提：原对象不是 const）
+
+示例：
+```cpp
 const int a = 10;
 int* p = const_cast<int*>(&a);
-
-❗ 关键规则：
-
-*p = 20; // ❌ UB（如果 a 原本是 const）
-
-✔ 正确使用：
-
-void foo(const int* p) {
-    int* mod = const_cast<int*>(p); // 前提：原对象不是 const
-}
-
+```

@@ -1,32 +1,31 @@
 # 编译原理基础
-
 ## 编译/链接流程
 ```mermaid
 flowchart LR
-    SRC[.c/.cpp 源文件]
-    HDR[.h/.hpp 头文件]
+  SRC[.c/.cpp 源文件]
+  HDR[.h/.hpp 头文件]
 
-    subgraph COMPILER [编译器 gcc/clang]
-        direction TB
-        PRE[预处理<br/>#include 宏展开]
-        COMP[编译<br/>生成汇编]
-        ASM[汇编<br/>生成机器码]
-    end
+  subgraph COMPILER [编译器 gcc/clang]
+      direction TB
+      PRE[预处理<br/>#include 宏展开]
+      COMP[编译<br/>生成汇编]
+      ASM[汇编<br/>生成机器码]
+  end
 
-    OBJ[.o/.obj 目标文件]
+  OBJ[.o/.obj 目标文件]
 
-    subgraph LINKER [链接器 ld/lld]
-        LINK[符号解析<br/>重定位]
-    end
+  subgraph LINKER [链接器 ld/lld]
+      LINK[符号解析<br/>重定位]
+  end
 
-    EXE[.exe/.out/.elf 可执行文件]
+  EXE[.exe/.out/.elf 可执行文件]
 
-    SRC --> PRE
-    HDR -->|#include 展开合并| PRE
-    PRE --> COMP --> ASM --> OBJ
-    OBJ --> LINK --> EXE
+  SRC --> PRE
+  HDR -->|#include 展开合并| PRE
+  PRE --> COMP --> ASM --> OBJ
+  OBJ --> LINK --> EXE
 ```
-
+- - -
 ## 编译(complier)
 
 ### 1.预处理
@@ -52,6 +51,36 @@ flowchart LR
 debug为调试的便捷对代码进行了调整
 release为了运行的速度，加入了加速库修改了代码
 
+### 预编译头文件 PCH（Precompiled Header）
+对于几乎不会变化、但又很重的头文件（比如标准库），我们可以选择提前编译好，下次直接复用，避免每次重复编译，这个操作就叫做PCH
+实现方法实例：
+`pch.h`里
+```cpp
+#pragma once
+
+#include <iostream>
+#include <vector>
+#include <map>
+#include <unordered_map>
+#include <string>
+#include <algorithm>
+#include <numeric>
+#include <thread>
+#include <chrono>
+```
+`pch.cpp`里
+```cpp
+#include "pch.h"
+```
+`other.cpp`里
+```cpp
+#include "pch.h"
+void func1() {
+  std::vector<int> v(10000, 1);
+  std::cout << v.size() << std::endl;
+}
+```
+- - -
 ## 链接(linker)
 
 ### *报错*
@@ -67,7 +96,7 @@ release为了运行的速度，加入了加速库修改了代码
 - 在同一.c文件中不要反复声明/定义（要当心include的.h文件）
 理论上，声明必须出现在.h中；定义决不能出现在.c中
 **头文件的作用** : 声明函数（c的标准库以.h结尾，而c++的标准库没有后缀名）
-
+- - -
 ## GNU(GNU's Not Unix) C/C++ Compiler
 
 GCC是自由软件运动组织GNU的一个子项目, 是C编译器工具, 是GNU C Compiler的缩写；用于编译C和C++文件。
@@ -140,7 +169,7 @@ gcc -o <output_file.exe> <source_file_1.c> <source_file_2.cpp> -lstdc++
 ```bash
 gcc -o test.exe test.c function.1 cpp -lstdc++
 ```
-
+- - -
 ## Make和CMake
 Make和CMake是C/C++项目构建工具。
 Make根据`makefile`文件来编译C和C++文件并生成可执行文件。

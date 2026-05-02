@@ -63,17 +63,18 @@ int main(){
 ```
 
 ### 方案四 tuple
-返回一个元组，可以包含不同类型的多个值，用结构化绑定（C++17）方便拆解
-缺点字段没有名字，只能靠顺序读或`std::get`
+返回一个元组，可以包含不同类型的多个值，用**结构化绑定**（C++17）方便拆解
+缺点是字段没有名字，只能靠用传统的顺序读或`std::get`
 例如：
 ```cpp
 #include <tuple>
-tuple<int, int, double> compute(int a, int b) {
+#include <iostream>
+
+std::tuple<int, int, double> compute(int a, int b) {
   return {a + b, a - b, a * b};
 }
-
 int main(){
-  // 使用 (C++17)
+  // 使用 C++17 结构化绑定
   auto [sum, diff, product] = compute(10, 3);
   // 或 C++11/14 用 tie
   int s, d;
@@ -88,16 +89,15 @@ int main(){
 例如：
 ```cpp
 #include <utility> 
+#include <iostream>
 
 pair<int, double> compute(int a, int b) {
   return {a + b, a * b};
 }
-
 int main() {
   // C++17 结构化绑定
   auto [sum, product] = compute(10, 3);
-  
-  // 传统方式
+  // 或传统方式
   pair<int, double> res = compute(10, 3);
   int s = res.first;
   double p = res.second;

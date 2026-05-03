@@ -60,7 +60,7 @@ int main(){
 #include <variant>
 int main(){
   std::variant <std::string, int> data;
-  data = "Cherno";
+  data = "Eugene";
   std:: cout << std::get<std:: string>(data) << "\n";
   if(auto value = std::get_if<std::string>(&data)){
     std::string& v = *value;
@@ -87,3 +87,17 @@ int main(){
 | **常见用途**   | 泛型算法、容器、函数模板、类模板     | 可变类型容器、事件系统、联合类型、安全替代 `union`   |
 
 ## any 处理未知数据类型
+比方说：
+```cpp
+#include <iostream>
+#include <any>
+int main(){
+  std::any data;
+  data = 2;
+  data = "Eugene";
+  data = std::string("Eugene");
+
+  std::string& string = std::any_cast<std::string&>(data);  
+}
+```
+在处理小于32字节的类型时候，any就是一个安全的union；大于32字节的时候，他就会通过动态分配内存来储蓄变量
